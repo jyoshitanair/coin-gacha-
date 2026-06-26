@@ -57,8 +57,10 @@ export default function Signup() {
         </form>
         <button type = "button" onClick = {( ) => setPage("login")}> Login </button>
          <Turnstile
-                        siteKey={import.meta.env.VITE_TURNSTILE_SITE_KEY}
-                        onSuccess={(token) => {setCaptchaToken(token)}}
+            siteKey={import.meta.env.VITE_TURNSTILE_SITE_KEY}
+            onSuccess={(token) => {setCaptchaToken(token)}}
+            onExpire = {() => setCaptchaToken(null)}
+            onError = {() => alert("captcha failed. refresh and try again")}
         />
         </>}
 

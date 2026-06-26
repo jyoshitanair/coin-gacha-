@@ -12,15 +12,16 @@ function App() {
     <>
     {currentPage == "home >-<" &&
     <>
-    <p> Gacha Coins </p>
-    {/*{} makes you to to javascript! 
-    () make a function
-     arrow function makes it run later*/}
-     <button type = "button" onClick = {() => setCurrentPage("login")}> Login </button>
-    </>
-    }
-    {/* in react u cant use if statements, the one on the right will run if true*/}
-      {currentPage == "login" && <Login />}
+      <p> Gacha Coins </p>
+      {console.log("hi")}
+      {/*{} makes you to to javascript! 
+      () make a function
+      arrow function makes it run later*/}
+      <button type = "button" onClick = {() => setCurrentPage("login")}> Login </button>
+      </>
+      }
+      {/* in react u cant use if statements, the one on the right will run if true*/}
+        {currentPage == "login" && <Login />}
     </>
   )
 }
