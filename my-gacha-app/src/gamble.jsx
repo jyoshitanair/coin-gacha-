@@ -1,6 +1,15 @@
 import React, { useState } from 'react';
+import Dashboard from './dashboard.jsx'
+import Table from './table.jsx'
 
-export default function Flashcards() {
+//supabase
+import { createClient } from '@supabase/supabase-js'
+const supabaseUrl = import.meta.env.VITE_SUPABASE_URL
+const supabaseKey = import.meta.env.VITE_SUPABASE_PUBLISHABLE_KEY
+const supabase = createClient(supabaseUrl, supabaseKey)
+
+export default function Gamble({uuid}) {
+    const [page,setPage] = useState("gamble")
     //dictionary
     const assets = {
         body: [1,2,3,4,5,6,7,8,9],
@@ -19,6 +28,7 @@ export default function Flashcards() {
         mouths: 1,
         accessories: 1,
         rarity: 0,
+        gacha_id: 0,
     });
     function percentCalc(points1,percent1,amount) {
         var final = amount
@@ -39,10 +49,13 @@ export default function Flashcards() {
         var index = Math.floor(Math.random() *(final-start+1))+start
         return [index,points1]
     }
-    function createChar() {
+    //must be because inside it is an await
+    async function createChar() {
+        var digit = 1
         var points = 0
         var newChar = {}
         var index = 0  //desired value
+        newChar["gacha_id"] = 0
        Object.keys(assets).forEach((category) => {
             //math random returns randf from 0-1
             const percent = Math.random()*100.0
@@ -61,6 +74,8 @@ export default function Flashcards() {
             index = calc[0]
             points = calc[1]
             newChar[category] = index
+            newChar["gacha_id"] += (index*digit)
+            digit *= 10
        });
        var rarity = Math.floor(((points - 6)*5)/18)+1
        if (rarity >= 5){
@@ -71,14 +86,39 @@ export default function Flashcards() {
        }
        newChar["rarity"] = rarity
        setGacha(newChar)
+       console.log(newChar)
+       if(uuid){
+        const {data, error} = await supabase.from("user_pulls").insert(
+            [{
+                user: uuid,
+                gacha_id: newChar.gacha_id,
+                rarity: newChar.rarity,
+            
+            }])
+            if (error){
+                alert(error.message)
+            }
+            if (data){
+                console.log(data)
+            }
+        };
     };
     return(
     <>
+        {page == "gamble" && 
+        <>
         <p> gamble </p>
         <button onClick = {() => createChar()}> pull! </button>
+        <button onClick = {() => setPage("dashboard")}> Dashboard</button>
+        <button onClick = {() => setPage("table")}> View All</button>
         {gacha.rarity != 0 &&
-            <p>Rarity: {gacha.rarity}</p>
+            <>
+            <p>Congrats you rolled #{gacha.gacha_id}</p>
+            </>
         }
+        </>}
+        {page == "dashboard" && <Dashboard/>}
+        {page == "table" && <Table/>}
     </>
     );
 }

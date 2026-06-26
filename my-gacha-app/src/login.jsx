@@ -20,6 +20,7 @@ export default function Login() {
     const [password, setPassword] = useState("");
     const [page, setPage] = useState("login");
     async function handleLogin(e) {
+        //e only for forms :3
         e.preventDefault();
         if (!captchaToken) {
             alert("uh oh. complete your captcha first!")
