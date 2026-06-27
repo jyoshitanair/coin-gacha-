@@ -118,7 +118,7 @@ export default function Gamble({uuid}) {
         }
         </>}
         {page == "dashboard" && <Dashboard/>}
-        {page == "table" && <Table/>}
+        {page == "table" && <Table uuid = {uuid}/>}
     </>
     );
 }

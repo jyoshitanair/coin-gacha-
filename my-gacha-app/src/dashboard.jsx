@@ -12,6 +12,7 @@ const supabase = createClient(supabaseUrl, supabaseKey)
 export default function Dashboard() {
     const [page, setPage] = useState("dashboard");
     const [uuid, setUuid] = useState(null);
+    const [email, setEmail] = useState(null);
     //function, array [] = once [dependency], when the dependency changes
     useEffect(() => {
         async function getUser() {
@@ -20,6 +21,7 @@ export default function Dashboard() {
             const {data: {user}} = await supabase.auth.getUser()
             if (user) {
                 setUuid(user.id)
+                setEmail(user.email)
             }else{
                 alert("no user? what!?")
                 setPage("login")
@@ -32,7 +34,9 @@ export default function Dashboard() {
         {page == "dashboard" && 
             <>
             <p> welcome to the app</p>
-            <p> This is you!</p>
+            <p> This is you! </p>
+            <p> Email: {email}</p>
+            <p> UUID: {uuid} </p>
             <button onClick={() => setPage("gamble")}> Gamble</button>
             <button onClick = {() => setPage("flashcards")}> Flashcards</button>
             </>

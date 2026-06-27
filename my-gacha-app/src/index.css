@@ -27,6 +27,11 @@
 
   @media (max-width: 1024px) {
     font-size: 16px;
+    #root{
+      width: 100%;
+      height: 100%;
+      border-inline:none;
+    }
   }
 }
 
@@ -52,10 +57,13 @@
 
 body {
   margin: 0;
+  scrollbar-width: none;
+  overflow-y: auto;
+  overflow-x: hidden;
 }
 
 #root {
-  width: 1126px;
+  width: 100%;
   max-width: 100%;
   margin: 0 auto;
   text-align: center;
@@ -108,4 +116,53 @@ code {
   line-height: 135%;
   padding: 4px 8px;
   background: var(--code-bg);
+}
+
+/* stuff i added lol */
+
+.maintext{
+  font-size: 80px;
+  color:#4e0c81;
+  width: 90vh;
+  line-height: 100px;
+}
+.buttons{
+  font-weight: bold;
+  color: #02362d;
+  cursor: pointer;
+  user-select:none;
+  border-radius: 40px;
+  padding: 30px ;
+  width: fit-content;
+  background-color: #5bdec6;
+  font-size: 25px;
+  font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+  border: 3.3px  solid #02362d;
+}
+.buttons:hover{
+  transform: scale(1.15);
+  background-color: #c1ece4;
+}
+.buttons:active{
+  transform: scale(0.9);
+  background-color: #14e4be;
+}
+.center{
+  font-family:Verdana, Geneva, Tahoma, sans-serif;
+  font-size: 23px;
+  color: rgb(74, 5, 79);
+  gap: 40px;
+  justify-content:space-around;
+  display:flex;
+  align-items: center;
+  flex-direction: column;
+  background-color: #c084fc;
+  width: 100vw;
+  height: 100vh;
+}
+#buttonSpacer{
+  display:flex;
+  align-items: center;
+  flex-direction: row;
+  column-gap: 200px;
 }
