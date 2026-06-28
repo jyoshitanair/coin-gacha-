@@ -13,12 +13,17 @@ export default function Signup() {
     const [page, setPage] = useState("signup");
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
+    const[processing, setProcessing] = useState(false);
 
     async function handleSignup(e){
+        setProcessing(true)
         e.preventDefault();
+        if (!email || !password){
+            toast.error("Missing Fields");
+            return;
+        }
         if (!captchaToken) {
-            toast.error("uh oh. complete your captcha first!")
-            setCaptchaToken(null)
+            toast.error("Complete your captcha first!")
             return;
         }
         const {error} = await supabase.auth.signUp(
@@ -30,23 +35,28 @@ export default function Signup() {
         )
         if (error){
             toast.error(error.message)
-            setCaptchaToken(null)
+            setCaptchaToken(null);
+            setProcessing(false)
         }else{
-            toast.success("Account Created. Being redirected to login page")
-            setPage("login")
+            toast.success("Account Created! Redirecting to login page...")
+            setTimeout(() => {
+                setPage("login")
+                setProcessing(false)
+            },1500)
         }
     }
 
 
     return(
         <>
-        <Toaster className = "toaster"/>
         <div className = "center">
             {page == "signup" && 
             <>
+            <Toaster className = "toaster"/>
             <h1 className = "maintext">Sign Up</h1>
             <form className = "form">
                 <input
+                disabled = {processing}
                 className = "inputs"
                 type = "email"
                 placeholder = "enter email"
@@ -54,27 +64,43 @@ export default function Signup() {
                 onChange = {(e) => setEmail(e.target.value)}
                 />
                 <input
+                disabled = {processing}
                 className = "inputs"
                 type = "password"
                 placeholder = "enter password"
                 value = {password}
                 onChange = {(e) => setPassword(e.target.value)}
                 />
-                <Turnstile
-                className = "turnstile"
-                    siteKey={import.meta.env.VITE_TURNSTILE_SITE_KEY}
-                    onSuccess={(token) => {setCaptchaToken(token)}}
-                    onExpire = {() => setCaptchaToken(null)}
-                    onError = {() => {
-                        toast.error("captcha failed. refresh and try again")
-                        setCaptchaToken(null)
-                        }
-                    }
-                />
-                <button className = "buttons_normal" type = "submit" onClick = {handleSignup}> Sign up </button>
+                {captchaToken != null && 
+                <>
+                    <Turnstile
+                        className = "turnstile"
+                        siteKey={import.meta.env.VITE_TURNSTILE_SITE_KEY}
+                        onSuccess={(token) => {setCaptchaToken(token)}}
+                        onExpire = {() => setCaptchaToken(null)}
+                        onError = {() => {
+                            toast.error("captcha failed.");
+                            setCaptchaToken(null);
+                        }}
+                    />
+                </>}
+                {captchaToken == null && 
+                <>
+                    <Turnstile
+                        className = "turnstile"
+                        siteKey={import.meta.env.VITE_TURNSTILE_SITE_KEY}
+                        onSuccess={(token) => {setCaptchaToken(token)}}
+                        onExpire = {() => setCaptchaToken(null)}
+                        onError = {() => {
+                            toast.error("captcha failed.");
+                            setCaptchaToken(null);
+                        }}
+                    />
+                </>}
+                <button disabled = {processing} className = "buttons_normal" type = "submit" onClick = {handleSignup}> Sign up </button>
 
             </form>
-            <button className = "accent_button" type = "button" onClick = {( ) => setPage("login")}> Login </button>
+            <button disabled = {processing} className = "accent_button" type = "button" onClick = {( ) => setPage("login")}> Login </button>
             </>}
 
             {page == "login" && <Login/>}

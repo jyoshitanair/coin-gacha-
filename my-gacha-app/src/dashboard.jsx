@@ -2,6 +2,7 @@ import React, {useEffect, useState} from 'react';
 import Gamble from './gamble.jsx'
 import Flashcards from './flashcards.jsx'
 import Login from './login.jsx'
+import toast, {Toaster} from 'react-hot-toast'
 //supabase
 import { createClient } from '@supabase/supabase-js'
 const supabaseUrl = import.meta.env.VITE_SUPABASE_URL
@@ -13,6 +14,7 @@ export default function Dashboard() {
     const [page, setPage] = useState("dashboard");
     const [uuid, setUuid] = useState(null);
     const [email, setEmail] = useState(null);
+    const [processing, setProcessing] = useState(false)
     //function, array [] = once [dependency], when the dependency changes
     useEffect(() => {
         async function getUser() {
@@ -29,16 +31,33 @@ export default function Dashboard() {
         }
         getUser()
     }, []);
+    async function Logout() {
+            setProcessing(true)
+            const {error} = await supabase.auth.signOut()
+            if (error){
+                toast.error(error.message);
+                setProcessing(false)
+                return;
+            }else{
+                toast.success("Logging Out!");
+                setTimeout(() => {
+                    setPage("login")
+                    setProcessing(false)
+                },1500)
+        }
+    }
     return(
         <>
         {page == "dashboard" && 
             <>
+            <Toaster/>
             <p> welcome to the app</p>
             <p> This is you! </p>
             <p> Email: {email}</p>
             <p> UUID: {uuid} </p>
-            <button onClick={() => setPage("gamble")}> Gamble</button>
-            <button onClick = {() => setPage("flashcards")}> Flashcards</button>
+            <button disabled = {processing} onClick={() => setPage("gamble")}> Gamble</button>
+            <button disabled = {processing} onClick={() => Logout()}> Logout</button>
+            <button disabled = {processing} onClick = {() => setPage("flashcards")}> Flashcards</button>
             </>
         }
         {page == "login" && <Login />}
