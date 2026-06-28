@@ -173,11 +173,19 @@ code {
   font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
   border: 3.3px  solid #02362d;
 }
-.buttons:hover, .buttons_normal:hover,.accent_button:hover{
+.buttons:hover, .buttons_normal:hover{
   transform: scale(1.1);
   background-color: #c1ece4;
 }
-.buttons:active,.buttons_normal:active, .accent_button:active{
+.accent_button:hover{
+  transform: scale(1.1);
+  background-color: #eba0ea;
+}
+.accent_button:active{
+  transform: scale(0.9);
+  background-color: #cc06c9;
+}
+.buttons:active,.buttons_normal:active{
   transform: scale(0.9);
   background-color: #14e4be;
 }
