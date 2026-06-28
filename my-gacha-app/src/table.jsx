@@ -37,12 +37,14 @@ export default function Table({uuid}) {
                             <thead>
                                 <th>ID</th>
                                 <th>Rarity</th>
+                                <th> Image</th>
                             </thead>
                             <tbody>
                             {pulls && pulls.map((pull) => (
                             <tr>
                                 <td> {pull.gacha_id}</td>
                                 <td> {pull.rarity}</td>
+                                <td> <img id = "small_img" src = {pull.img}/></td>
                             </tr>
                             ))}
                             </tbody>

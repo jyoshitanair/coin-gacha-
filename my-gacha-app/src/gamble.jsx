@@ -30,8 +30,44 @@ const images = Object.fromEntries(
         return [finalName,module.default]
     }));
 export default function Gamble({uuid}) {
-
     const [page,setPage] = useState("gamble")
+    const [load,setLoad] = useState(0)
+    const [processing,setProcessing] = useState(false)
+    //store the img
+    useEffect(() => {
+        if(load == 6){
+            async function setupdatabase(){
+                const img_element = document.getElementById("imgContainer");
+                if (!img_element){
+                    return
+                }
+                const canvas = await html2canvas(img_element,{
+                    backgroundColor: null,
+                    useCORS: true,
+                })
+                //needed for transparent
+                const imgString = canvas.toDataURL('image/png')
+                if(uuid){
+                    const {data, error} = await supabase.from("user_pulls").insert(
+                        [{
+                            user: uuid,
+                            gacha_id: gacha.gacha_id,
+                            rarity: gacha.rarity,
+                            img: imgString
+                        }])
+                    if (error){
+                        alert(error.message)
+                    }
+                    if (data){
+                        console.log(data)
+                    }
+                }
+            }    
+            setupdatabase()
+            setProcessing(false)
+        }
+        
+    }, [load]);
     //dictionary
     const assets = {
         body: [1,2,3,4,5,6,7,8,9],
@@ -73,6 +109,8 @@ export default function Gamble({uuid}) {
     }
     //must be because inside it is an await
     async function createChar() {
+        setProcessing(true)
+        setLoad(0)
         var digit = 1
         var points = 0
         var newChar = {}
@@ -108,54 +146,26 @@ export default function Gamble({uuid}) {
        }
        newChar["rarity"] = rarity
        setGacha(newChar)
-       //store the img
-       setTimeout(async () => {
-            const img_element = document.get_element_by_id("imgContainer");
-            if (img_element){
-                return
-            }
-            const canvas = await html2canvas(img_element,{
-                backgroundColor: null;
-            })
-            //needed for transparent
-            imgString = canvas.toDataURL('image/png')
-       },500);
-       if(uuid){
-        const {data, error} = await supabase.from("user_pulls").insert(
-            [{
-                user: uuid,
-                gacha_id: newChar.gacha_id,
-                rarity: newChar.rarity,
-                img: imgString
-            }])
-            if (error){
-                alert(error.message)
-            }
-            if (data){
-                console.log(data)
-            }
-        };
-        
     };
     return(
     <>
         {page == "gamble" && 
         <>
         <p> gamble </p>
-        <button onClick = {() => createChar()}> pull! </button>
+        <button disabled = {processing} onClick = {() => createChar()}> pull! </button>
         <button onClick = {() => setPage("dashboard")}> Dashboard</button>
         <button onClick = {() => setPage("table")}> View All</button>
         {gacha.rarity != 0 &&
             <>
             <p>Congrats you rolled #{gacha.gacha_id}</p>
             <p>Rarity #{gacha.rarity}</p>
-            <div id = "imgContainer">
-                <img src = {images[`body_${gacha.body}`]} id = "body_img"/>
-                <img src = {images[`accessories_${gacha.accessories}`]} id = "accessories_img"/>
-                <img src = {images[`eyes_${gacha.eyes}`]} id = "eyes_img"/>
-                <img src = {images[`hair_${gacha.hair}`]} id = "hair_img"/>
-                <img src = {images[`head_${gacha.head}`]} id = "head_img"/>
-                <img src = {images[`mouths_${gacha.mouths}`]} id = "mouths_img"/>
+            <div id = "imgContainer" key = {gacha.id}>
+                <img src = {images[`body_${gacha.body}`]} id = "body_img" onLoad={() => setLoad(prev => prev +1)}/>
+                <img src = {images[`accessories_${gacha.accessories}`]} id = "accessories_img" onLoad={() => setLoad(prev => prev +1)}/>
+                <img src = {images[`eyes_${gacha.eyes}`]} id = "eyes_img" onLoad={() => setLoad(prev => prev +1)}/>
+                <img src = {images[`hair_${gacha.hair}`]} id = "hair_img" onLoad={() => setLoad(prev => prev +1)}/>
+                <img src = {images[`head_${gacha.head}`]} id = "head_img" onLoad={() => setLoad(prev => prev +1)}/>
+                <img src = {images[`mouths_${gacha.mouths}`]} id = "mouths_img" onLoad={() => setLoad(prev => prev +1)}/>
             </div>
             </>
         }
