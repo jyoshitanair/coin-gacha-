@@ -1,6 +1,7 @@
 import react from 'react';
 import { useState } from 'react';
 import Login from './login.jsx'
+import toast, {Toaster} from 'react-hot-toast'
 //supabase
 import { createClient } from '@supabase/supabase-js'
 const supabaseUrl = import.meta.env.VITE_SUPABASE_URL
@@ -16,7 +17,8 @@ export default function Signup() {
     async function handleSignup(e){
         e.preventDefault();
         if (!captchaToken) {
-            alert("uh oh. complete your captcha first!")
+            toast.error("uh oh. complete your captcha first!")
+            setCaptchaToken(null)
             return;
         }
         const {error} = await supabase.auth.signUp(
@@ -27,9 +29,10 @@ export default function Signup() {
             }
         )
         if (error){
-            alert(error.message)
+            toast.error(error.message)
+            setCaptchaToken(null)
         }else{
-            alert("Account Created. Being redirected to login page")
+            toast.success("Account Created. Being redirected to login page")
             setPage("login")
         }
     }
@@ -37,34 +40,45 @@ export default function Signup() {
 
     return(
         <>
-        {page == "signup" && 
-        <>
-        <h1>Signup</h1>
-        <form>
-            <input
-            type = "email"
-            placeholder = "enter email"
-            value = {email}
-            onChange = {(e) => setEmail(e.target.value)}
-            />
-            <input
-            type = "password"
-            placeholder = "enter password"
-            value = {password}
-            onChange = {(e) => setPassword(e.target.value)}
-            />
-            <button type = "submit" onClick = {handleSignup}> Sign up </button>
-        </form>
-        <button type = "button" onClick = {( ) => setPage("login")}> Login </button>
-         <Turnstile
-            siteKey={import.meta.env.VITE_TURNSTILE_SITE_KEY}
-            onSuccess={(token) => {setCaptchaToken(token)}}
-            onExpire = {() => setCaptchaToken(null)}
-            onError = {() => alert("captcha failed. refresh and try again")}
-        />
-        </>}
+        <Toaster className = "toaster"/>
+        <div className = "center">
+            {page == "signup" && 
+            <>
+            <h1 className = "maintext">Sign Up</h1>
+            <form className = "form">
+                <input
+                className = "inputs"
+                type = "email"
+                placeholder = "enter email"
+                value = {email}
+                onChange = {(e) => setEmail(e.target.value)}
+                />
+                <input
+                className = "inputs"
+                type = "password"
+                placeholder = "enter password"
+                value = {password}
+                onChange = {(e) => setPassword(e.target.value)}
+                />
+                <Turnstile
+                className = "turnstile"
+                    siteKey={import.meta.env.VITE_TURNSTILE_SITE_KEY}
+                    onSuccess={(token) => {setCaptchaToken(token)}}
+                    onExpire = {() => setCaptchaToken(null)}
+                    onError = {() => {
+                        toast.error("captcha failed. refresh and try again")
+                        setCaptchaToken(null)
+                        }
+                    }
+                />
+                <button className = "buttons_normal" type = "submit" onClick = {handleSignup}> Sign up </button>
 
-        {page == "login" && <Login/>}
-        </>
+            </form>
+            <button className = "accent_button" type = "button" onClick = {( ) => setPage("login")}> Login </button>
+            </>}
+
+            {page == "login" && <Login/>}
+        </div>
+    </>
     );
 }

@@ -1,6 +1,6 @@
 import React from 'react';
 import { useState } from 'react';
-
+import toast, {Toaster} from 'react-hot-toast'
 //supabase
 import { createClient } from '@supabase/supabase-js'
 const supabaseUrl = import.meta.env.VITE_SUPABASE_URL
@@ -23,7 +23,8 @@ export default function Login() {
         //e only for forms :3
         e.preventDefault();
         if (!captchaToken) {
-            alert("uh oh. complete your captcha first!")
+            toast.error("uh oh. complete your captcha first!");
+            setCaptchaToken(null);
             return;
         }
         {/* this makes it so that the form doesnt refresh and lose all data
@@ -36,18 +37,21 @@ export default function Login() {
             }
         )
         if (error) {
-            alert(error.message)
+            toast.error(error.message)
+            setCaptchaToken(null)
         } else {
-            alert("Welcome back!")
+            toast.success("Welcome back!")
             setPage("dashboard")
         }
     }
     return (
-        <div  className = "center" >
+        <>
+         <Toaster className = "toaster"/>
+         <div  className = "center" >
             {page == "login" && 
             <>
             <h1 className = "maintext" > login page</h1>
-            <form onSubmit={handleLogin} id = "form">
+            <form onSubmit={handleLogin} className = "form">
                 {/* different types are text,email,number,checkbox,password*/}
                 {/*so target is where it happened (in the input box) and value is its value
                 no comments inside tags!*/}
@@ -66,18 +70,24 @@ export default function Login() {
                     onChange={(e) => setPassword(e.target.value)}
                 />
                 <Turnstile
+                className = "turnstile"
                 siteKey={import.meta.env.VITE_TURNSTILE_SITE_KEY}
                 onSuccess={(token) => {setCaptchaToken(token)}}
                 onExpire = {() => setCaptchaToken(null)}
-                onError = {() => alert("captcha failed. refresh and try again")}
+                onError = {() => {
+                    toast.error("captcha failed. refresh and try again",
+                    setCaptchaToken(null))}
+                }
                 />
                 <button className = "buttons_normal" type="submit" >Let's go!</button>
             </form>
-            <button className = "buttons_normal" id = "accent_button"  type = "button" onClick ={() => setPage("signup")}>Sign up?</button>
+            <button className = "accent_button"  type = "button" onClick ={() => setPage("signup")}>Sign up?</button>
             </>
             }
             {page == "signup" && <Signup />}
             {page == "dashboard" && <Dashboard/>}
         </div>
+        </>
+        
     );
 }

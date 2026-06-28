@@ -119,12 +119,16 @@ code {
 }
 
 /* stuff i added lol */
-
+@font-face{
+  font-family: cat-font;
+  src: url("assets/Cat_font-Regular.ttf") format("truetype");/*can not use .ttf!*/
+}
 .maintext{
-  font-size: 80px;
+  font-family:cat-font !important;
+  font-size: 140px;
   color:#4e0c81;
-  width: 90vh;
-  line-height: 100px;
+  width: 70vw;
+  line-height: 150px;
 }
 .buttons_normal{
   margin: 0px auto;
@@ -140,13 +144,20 @@ code {
   font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
   border: 2.3px  solid #02362d;
 }
-#accent_button{
+.accent_button{
+  margin: 0px auto;
+  font-weight: bold;
   font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
-  color: #0f0003;
-  background-color: #e73a5f;
-  border: 2.3px  solid #560214;
+  cursor: pointer;
+  user-select:none;
+  font-size: 15px;
+  border-radius: 40px;
+  padding: 10px 30px ;
+  width: fit-content;
+  color: #2e022d;
+  background-color: #d142cf;
+  border: 2.3px  solid #2e022d;
   margin-bottom: 7vh;
-
 }
 .buttons{
   margin: 0px auto;
@@ -162,11 +173,11 @@ code {
   font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
   border: 3.3px  solid #02362d;
 }
-.buttons:hover, .buttons_normal:hover{
+.buttons:hover, .buttons_normal:hover,.accent_button:hover{
   transform: scale(1.1);
   background-color: #c1ece4;
 }
-.buttons:active,.buttons_normal:active{
+.buttons:active,.buttons_normal:active, .accent_button:active{
   transform: scale(0.9);
   background-color: #14e4be;
 }
@@ -249,25 +260,38 @@ code {
   height: 50px;
 }
 
-#form{
+.form{
   gap: 10px;
   justify-content:space-around;
   display:flex;
   align-items: center;
   flex-direction: column;
   margin: auto auto;
-  width: 300px;
+  width: 320px;
   height: 250px;
   overflow:hidden;
 }
-.inputs, .inputs::placeholder{
-  font-family:Verdana, Geneva, Tahoma, sans-serif;
+.inputs{
+  font-family:cursive;
   font-size: 13px;
   opacity: 1;
-  color: rgb(78, 5, 91);
-  background-color: #9e40fc;
+  color: rgb(36, 1, 42);
+  background-color: #d38bed;
   width: 290px;
 }
+.inputs::placeholder{
+  color: rgb(170, 13, 198);
+}
 .inputs:focus{
-  outline:3px solid #a7aeff;
+  outline:3px solid #911d93;
+  color: rgb(36, 1, 42);
+  font-weight: bold;
+}
+.turnstile{
+  border-radius:65px;
+  border-width: 3.3px;
+  border-color:#50055a;
+  border-style: solid;
+  height: 60px;
+  overflow: hidden; 
 }
