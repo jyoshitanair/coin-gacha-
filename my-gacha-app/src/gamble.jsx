@@ -1,14 +1,36 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Dashboard from './dashboard.jsx'
 import Table from './table.jsx'
-
+import html2canvas from 'html2canvas';
 //supabase
 import { createClient } from '@supabase/supabase-js'
 const supabaseUrl = import.meta.env.VITE_SUPABASE_URL
 const supabaseKey = import.meta.env.VITE_SUPABASE_PUBLISHABLE_KEY
 const supabase = createClient(supabaseUrl, supabaseKey)
-
+const indexes = {
+        accessories:0,
+        body: 0,
+        eyes: 0,
+        hair: 0,
+        head: 0,
+        mouths: 0,
+    }
+//getting the images
+//eager makes it not lazy and insta load!
+const allImages = import.meta.glob('./assets/**/*.PNG',{eager:true});
+//obj with name_number: url
+const images = Object.fromEntries(
+    Object.entries(allImages).map(([path,module]) => {
+        const pathParts = path.split('/');
+        const folderName = pathParts[2];
+        if (indexes[folderName] !== undefined){
+            indexes[folderName] += 1
+        }
+        const finalName = `${folderName}_${indexes[folderName]}`
+        return [finalName,module.default]
+    }));
 export default function Gamble({uuid}) {
+
     const [page,setPage] = useState("gamble")
     //dictionary
     const assets = {
@@ -86,14 +108,25 @@ export default function Gamble({uuid}) {
        }
        newChar["rarity"] = rarity
        setGacha(newChar)
-       console.log(newChar)
+       //store the img
+       setTimeout(async () => {
+            const img_element = document.get_element_by_id("imgContainer");
+            if (img_element){
+                return
+            }
+            const canvas = await html2canvas(img_element,{
+                backgroundColor: null;
+            })
+            //needed for transparent
+            imgString = canvas.toDataURL('image/png')
+       },500);
        if(uuid){
         const {data, error} = await supabase.from("user_pulls").insert(
             [{
                 user: uuid,
                 gacha_id: newChar.gacha_id,
                 rarity: newChar.rarity,
-            
+                img: imgString
             }])
             if (error){
                 alert(error.message)
@@ -102,6 +135,7 @@ export default function Gamble({uuid}) {
                 console.log(data)
             }
         };
+        
     };
     return(
     <>
@@ -114,6 +148,15 @@ export default function Gamble({uuid}) {
         {gacha.rarity != 0 &&
             <>
             <p>Congrats you rolled #{gacha.gacha_id}</p>
+            <p>Rarity #{gacha.rarity}</p>
+            <div id = "imgContainer">
+                <img src = {images[`body_${gacha.body}`]} id = "body_img"/>
+                <img src = {images[`accessories_${gacha.accessories}`]} id = "accessories_img"/>
+                <img src = {images[`eyes_${gacha.eyes}`]} id = "eyes_img"/>
+                <img src = {images[`hair_${gacha.hair}`]} id = "hair_img"/>
+                <img src = {images[`head_${gacha.head}`]} id = "head_img"/>
+                <img src = {images[`mouths_${gacha.mouths}`]} id = "mouths_img"/>
+            </div>
             </>
         }
         </>}

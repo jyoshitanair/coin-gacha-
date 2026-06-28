@@ -166,3 +166,38 @@ code {
   flex-direction: row;
   column-gap: 200px;
 }
+#imgContainer{
+  margin: -40px auto;
+  position: relative;
+  overflow:hidden;
+  width: 350px;
+  height: 350px;
+}
+#imgContainer img{
+  /* so that they do not stack ontop of each other. absolute elements are invisible*/
+  position: absolute;
+  top: 0; 
+  left:0; 
+  /* lol not rlly necessary because everything is the same size but okay */
+  object-fit: contain;
+  width: 100%;
+  height: 100%;
+}
+#body_img{
+  z-index: 1;
+}
+#accessories_img{
+  z-index: 2;
+}
+#head_img{
+  z-index: 3;
+}
+#mouths_img{
+  z-index: 4;
+}
+#hair_img{
+  z-index: 5;
+}
+#eyes_img{
+  z-index: 6;
+}
