@@ -109,6 +109,9 @@ export default function Gamble({uuid}) {
     }
     //must be because inside it is an await
     async function createChar() {
+        if (processing){
+            return
+        }
         setProcessing(true)
         setLoad(0)
         var digit = 1
@@ -155,20 +158,33 @@ export default function Gamble({uuid}) {
         <button disabled = {processing} onClick = {() => createChar()}> pull! </button>
         <button onClick = {() => setPage("dashboard")}> Dashboard</button>
         <button onClick = {() => setPage("table")}> View All</button>
-        {gacha.rarity != 0 &&
+        <div id = "fattest_div">
+            {processing &&
             <>
             <p>Congrats you rolled #{gacha.gacha_id}</p>
             <p>Rarity #{gacha.rarity}</p>
-            <div id = "imgContainer" key = {gacha.id}>
-                <img src = {images[`body_${gacha.body}`]} id = "body_img" onLoad={() => setLoad(prev => prev +1)}/>
-                <img src = {images[`accessories_${gacha.accessories}`]} id = "accessories_img" onLoad={() => setLoad(prev => prev +1)}/>
-                <img src = {images[`eyes_${gacha.eyes}`]} id = "eyes_img" onLoad={() => setLoad(prev => prev +1)}/>
-                <img src = {images[`hair_${gacha.hair}`]} id = "hair_img" onLoad={() => setLoad(prev => prev +1)}/>
-                <img src = {images[`head_${gacha.head}`]} id = "head_img" onLoad={() => setLoad(prev => prev +1)}/>
-                <img src = {images[`mouths_${gacha.mouths}`]} id = "mouths_img" onLoad={() => setLoad(prev => prev +1)}/>
-            </div>
+                <div id = "imgContainer" key = {gacha.id}>
+                    <img src = {images[`body_${gacha.body}`]} className = "body_img" onLoad={() => setLoad(prev => prev +1)}/>
+                    <img src = {images[`accessories_${gacha.accessories}`]} className = "accessories_img" onLoad={() => setLoad(prev => prev +1)}/>
+                    <img src = {images[`eyes_${gacha.eyes}`]} className = "eyes_img" onLoad={() => setLoad(prev => prev +1)}/>
+                    <img src = {images[`hair_${gacha.hair}`]} className = "hair_img" onLoad={() => setLoad(prev => prev +1)}/>
+                    <img src = {images[`head_${gacha.head}`]} className = "head_img" onLoad={() => setLoad(prev => prev +1)}/>
+                    <img src = {images[`mouths_${gacha.mouths}`]} className = "mouths_img" onLoad={() => setLoad(prev => prev +1)}/>
+                </div>
             </>
-        }
+            }
+            {gacha.rarity != 0 &&
+            <>
+                <div id = "imgContainerdup">
+                    <img src = {images[`body_${gacha.body}`]} className = "body_img"/>
+                    <img src = {images[`accessories_${gacha.accessories}`]} className = "accessories_img"/>
+                    <img src = {images[`eyes_${gacha.eyes}`]} className = "eyes_img"/>
+                    <img src = {images[`hair_${gacha.hair}`]} className = "hair_img"/>
+                    <img src = {images[`head_${gacha.head}`]} className = "head_img"/>
+                    <img src = {images[`mouths_${gacha.mouths}`]} className = "mouths_img"/>
+                </div>  
+            </>}
+        </div>
         </>}
         {page == "dashboard" && <Dashboard/>}
         {page == "table" && <Table uuid = {uuid}/>}

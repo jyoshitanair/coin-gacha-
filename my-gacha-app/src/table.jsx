@@ -44,7 +44,7 @@ export default function Table({uuid}) {
                             <tr>
                                 <td> {pull.gacha_id}</td>
                                 <td> {pull.rarity}</td>
-                                <td> <img id = "small_img" src = {pull.img}/></td>
+                                <td> <img className = "small_img" src = {pull.img}/></td>
                             </tr>
                             ))}
                             </tbody>
