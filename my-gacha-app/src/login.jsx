@@ -43,38 +43,41 @@ export default function Login() {
         }
     }
     return (
-        <>
+        <div  className = "center" >
             {page == "login" && 
             <>
-            <p> login page</p>
-            <form onSubmit={handleLogin}>
+            <h1 className = "maintext" > login page</h1>
+            <form onSubmit={handleLogin} id = "form">
                 {/* different types are text,email,number,checkbox,password*/}
                 {/*so target is where it happened (in the input box) and value is its value
                 no comments inside tags!*/}
                 <input
+                    className = "inputs"
                     type="email"
                     placeholder="enter email"
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
                 />
                 <input
+                    className = "inputs"
                     type="password"
                     placeholder="enter password"
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
                 />
-                <button type="submit" >Let's go!</button>
-            </form>
-            <button type = "button" onClick ={() => setPage("signup")}>Sign up?</button>
-            <Turnstile
+                <Turnstile
                 siteKey={import.meta.env.VITE_TURNSTILE_SITE_KEY}
                 onSuccess={(token) => {setCaptchaToken(token)}}
                 onExpire = {() => setCaptchaToken(null)}
                 onError = {() => alert("captcha failed. refresh and try again")}
-            />
-            </>}
+                />
+                <button className = "buttons_normal" type="submit" >Let's go!</button>
+            </form>
+            <button className = "buttons_normal" id = "accent_button"  type = "button" onClick ={() => setPage("signup")}>Sign up?</button>
+            </>
+            }
             {page == "signup" && <Signup />}
             {page == "dashboard" && <Dashboard/>}
-        </>
+        </div>
     );
 }

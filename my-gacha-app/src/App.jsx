@@ -16,7 +16,7 @@ function App() {
         () make a function
         arrow function makes it run later*/}
         <div id = "buttonSpacer">
-          <button className = "buttons" type = "button" onClick = {() => setCurrentPage("login")}> Login </button>
+          <button className = "buttons" type = "button" onClick = {() => setCurrentPage("login")}>  Login  </button>
           <button className = "buttons" type = "button" onClick = {() => setCurrentPage("signup")}> Sign Up </button>
         </div>
         <p> Spend your coins to collect as many cute characters as you can! </p>

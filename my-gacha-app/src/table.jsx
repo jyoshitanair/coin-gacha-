@@ -30,6 +30,7 @@ export default function Table({uuid}) {
             {page == "table" && 
                 <>
                     <p> View all your pulls! </p>
+                    <button className = "buttons" onClick={() => setPage("gamble")}>gamble</button>
                     {loading == true && <p> I'm loading!</p>}
                     {loading == false && 
                     <>
@@ -50,7 +51,6 @@ export default function Table({uuid}) {
                             </tbody>
                         </table>
                     </>}
-                    <button onClick={() => setPage("gamble")}>gamble</button>
                 </>
             }
             {page == "gamble" && <Gamble uuid = {uuid}/>}

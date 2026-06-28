@@ -126,7 +126,30 @@ code {
   width: 90vh;
   line-height: 100px;
 }
+.buttons_normal{
+  margin: 0px auto;
+  font-weight: bold;
+  color: #02362d;
+  cursor: pointer;
+  user-select:none;
+  border-radius: 40px;
+  padding: 10px 30px ;
+  width: fit-content;
+  background-color: #5bdec6;
+  font-size: 15px;
+  font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+  border: 2.3px  solid #02362d;
+}
+#accent_button{
+  font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+  color: #0f0003;
+  background-color: #e73a5f;
+  border: 2.3px  solid #560214;
+  margin-bottom: 7vh;
+
+}
 .buttons{
+  margin: 0px auto;
   font-weight: bold;
   color: #02362d;
   cursor: pointer;
@@ -139,11 +162,11 @@ code {
   font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
   border: 3.3px  solid #02362d;
 }
-.buttons:hover{
-  transform: scale(1.15);
+.buttons:hover, .buttons_normal:hover{
+  transform: scale(1.1);
   background-color: #c1ece4;
 }
-.buttons:active{
+.buttons:active,.buttons_normal:active{
   transform: scale(0.9);
   background-color: #14e4be;
 }
@@ -152,7 +175,7 @@ code {
   font-size: 23px;
   color: rgb(74, 5, 79);
   gap: 40px;
-  justify-content:space-around;
+  justify-content:flex-start;
   display:flex;
   align-items: center;
   flex-direction: column;
@@ -224,4 +247,27 @@ code {
 .small_img{
   width: 50px;
   height: 50px;
+}
+
+#form{
+  gap: 10px;
+  justify-content:space-around;
+  display:flex;
+  align-items: center;
+  flex-direction: column;
+  margin: auto auto;
+  width: 300px;
+  height: 250px;
+  overflow:hidden;
+}
+.inputs, .inputs::placeholder{
+  font-family:Verdana, Geneva, Tahoma, sans-serif;
+  font-size: 13px;
+  opacity: 1;
+  color: rgb(78, 5, 91);
+  background-color: #9e40fc;
+  width: 290px;
+}
+.inputs:focus{
+  outline:3px solid #a7aeff;
 }
