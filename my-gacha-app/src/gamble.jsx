@@ -32,33 +32,43 @@ const images = Object.fromEntries(
         return [finalName,module.default]
     }));
 export default function Gamble({uuid}) {
+    const [processing,setProcessing] = useState(false);
     const [page,setPage] = useState("gamble");
     const [load,setLoad] = useState(0);
-    const [processing,setProcessing] = useState(false);
     const [coins, setCoins] = useState(0);
     //check the coins 
     useEffect(() => {updateCoinCount()}, [])
     async function updateCoinCount() {
+        setProcessing(true);
         const {data, error} = await supabase.from("coin_data").select('coins').eq("uuid", uuid).maybeSingle() //return an object not array and null if nothing
         if (error){
             toast.error(error.message)
+            setProcessing(false);
+            return
         }else{
-            let newCoinCount = data.coins;
+            let newCoinCount = 0 
+            if (data){
+                newCoinCount = data.coins;
+            }
             const {error} = await supabase.from("coin_data").upsert({uuid: uuid, coins: newCoinCount})
             if (error){
                 toast.error(error.message);
+                setProcessing(false);
                 return;
             }
+            setProcessing(false);
             setCoins(newCoinCount)
         }
     }
     //store the img
     useEffect(() => {
         if(load == 6){
+            setProcessing(true);
             async function setupdatabase(){
                 const img_element = document.getElementById("imgContainer");
                 if (!img_element){
-                    return
+                    setProcessing(false);
+                    return;
                 }
                 const canvas = await html2canvas(img_element,{
                     backgroundColor: null,
@@ -75,15 +85,16 @@ export default function Gamble({uuid}) {
                             img: imgString
                         }])
                     if (error){
-                        alert(error.message)
+                        alert(error.message);
+                        setProcessing(false);
+                        return;
                     }
                     if (data){
-                        console.log(data)
+                        setProcessing(false)
                     }
                 }
             }    
             setupdatabase()
-            setProcessing(false)
         }
         
     }, [load]);
@@ -128,10 +139,10 @@ export default function Gamble({uuid}) {
     }
     //must be because inside it is an await
     async function createChar() {
-        if (processing){
+        if (processing || coins<10){
             return
         }
-        setProcessing(true)
+        setProcessing(true);
         setLoad(0)
         var digit = 1
         var points = 0
@@ -169,21 +180,28 @@ export default function Gamble({uuid}) {
        newChar["rarity"] = rarity
        setGacha(newChar)
        //subtract from db 
-       async function updateCoinCount() {
+       async function subtractCoins() {
             const {data, error} = await supabase.from("coin_data").select('coins').eq("uuid", uuid).maybeSingle() //return an object not array and null if nothing
             if (error){
-                toast.error(error.message)
+                toast.error(error.message);
+                setProcessing(false);
+                return;
             }else{
-                let newCoinCount = data.coins - 10;
-                const {error} = await supabase.from("coin_data").upsert({uuid: uuid, coins: newCoinCount})
+                let newCoinCount1 = 0 
+                if (data){
+                    newCoinCount1 = data.coins - 10;
+                }
+                const {error} = await supabase.from("coin_data").upsert({uuid: uuid, coins: newCoinCount1})
                 if (error){
                     toast.error(error.message);
+                    setProcessing(false);
                     return;
                 }
+                setProcessing(false);
                 setCoins(newCoinCount)
             }
         }
-        updateCoinCount()
+        subtractCoins()
 
     };
     return(
@@ -193,10 +211,10 @@ export default function Gamble({uuid}) {
         <Toaster/>
         <h1 className = "maintext"> gamble </h1>
         <p> Coins: {coins} </p>
-        <button className = "special_button buttons_normal" disabled = {processing || (coins<10)} onClick = {() => createChar()}> {coins <=10? "Insufficent Funds":"Roll(10 Coins)"} </button>
-        <button className = "special_button buttons_normal" onClick = {() => setPage("dashboard")}> Dashboard</button>
-        <button className = "special_button buttons_normal" onClick = {() => setPage("flashcards")}> Get More Coins?</button>
-        <button className = "special_button accent_button" onClick = {() => setPage("table")}> View All Rolls </button>
+        <button className = "special_button buttons_normal" disabled = {processing || (coins<10)} onClick = {() => createChar()}> {coins <10? "Insufficent Funds":"Roll(10 Coins)"} </button>
+        <button className = "special_button buttons_normal"  disabled = {processing} onClick = {() => setPage("dashboard")}> Dashboard</button>
+        <button className = "special_button buttons_normal" disabled = {processing} onClick = {() => setPage("flashcards")}> Get More Coins?</button>
+        <button className = "special_button accent_button" disabled = {processing} onClick = {() => setPage("table")}> View All Rolls </button>
         {gacha.rarity != 0 &&
             <div id = "p_combined">
                 <p >Congrats you rolled #{gacha.gacha_id}</p>
@@ -204,7 +222,7 @@ export default function Gamble({uuid}) {
             </div>
         }
         <div id = "fattest_div">
-            {processing &&
+            {processing && coins>=10 &&
             <>
                 <div id = "imgContainer" key = {gacha.id}>
                     <img src = {images[`body_${gacha.body}`]} className = "body_img" onLoad={() => setLoad(prev => prev +1)}/>

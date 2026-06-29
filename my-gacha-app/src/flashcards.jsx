@@ -10,9 +10,10 @@ const supabase = createClient(supabaseUrl, supabaseKey)
 
 export default function Flashcards({uuid}) {
     useEffect(() => {
-        updateCoinCount(false)
+        updateCoinCount(false);
     }, []);
     async function updateCoinCount(tof) {
+        setLoading(true)
         const {data, error} = await supabase.from("coin_data").select('coins').eq("uuid", uuid).maybeSingle() //return an object not array and null if nothing
         if (error){
             toast.error(error.message)
@@ -28,13 +29,16 @@ export default function Flashcards({uuid}) {
             const {error} = await supabase.from("coin_data").upsert({uuid: uuid, coins: newCoinCount})
             if (error){
                 toast.error(error.message);
+                setLoading(false);
                 return;
             }
             setCoins(newCoinCount)
+            setLoading(false);
         }
     }
     const [page, setPage] = useState("flashcards");
     const [coins, setCoins] = useState(0);
+    const [loading, setLoading] = useState(false);
     return(
     <>
         {page == "flashcards" && <>
@@ -42,9 +46,9 @@ export default function Flashcards({uuid}) {
             <h1 class = "smallh1"> Get more Coins </h1>
             <p> Total Coins : {coins}</p>
             <p> here is a button that increases your coins!</p>
-            <button className = "accent_button" onClick={() => updateCoinCount(true)}> Coin Clicker!</button>
-            <button className = "buttons_normal" onClick={() => setPage("gamble")}> Gamble</button>
-            <button className = "buttons_normal" onClick={() => setPage("dashboard")}> Dashboard</button>
+            <button disabled = {loading} className = "accent_button" onClick={() => updateCoinCount(true)}> Coin Clicker!</button>
+            <button disabled = {loading} className = "buttons_normal" onClick={() => setPage("gamble")}> Gamble</button>
+            <button disabled = {loading} className = "buttons_normal" onClick={() => setPage("dashboard")}> Dashboard</button>
         </>}
         {page == "dashboard" && <Dashboard/>}
         {page == "gamble" && <Gamble uuid = {uuid}/>}
