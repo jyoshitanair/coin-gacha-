@@ -10,6 +10,7 @@ const supabase = createClient(supabaseUrl, supabaseKey)
 import { Turnstile } from '@marsidev/react-turnstile'
 
 export default function Signup() {
+    const [captchaToken, setCaptchaToken] = useState()
     const [page, setPage] = useState("signup");
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
@@ -20,10 +21,12 @@ export default function Signup() {
         e.preventDefault();
         if (!email || !password){
             toast.error("Missing Fields");
+            setProcessing(false)
             return;
         }
         if (!captchaToken) {
-            toast.error("Complete your captcha first!")
+            toast.error("Complete your captcha first!");
+            setProcessing(false)
             return;
         }
         const {error} = await supabase.auth.signUp(
@@ -49,9 +52,8 @@ export default function Signup() {
 
     return(
         <>
-        <div className = "center">
             {page == "signup" && 
-            <>
+            <div className = "center">
             <Toaster className = "toaster"/>
             <h1 className = "maintext">Sign Up</h1>
             <form className = "form">
@@ -101,10 +103,11 @@ export default function Signup() {
 
             </form>
             <button disabled = {processing} className = "accent_button" type = "button" onClick = {( ) => setPage("login")}> Login </button>
-            </>}
-
+            </div>
+            }
+            
             {page == "login" && <Login/>}
-        </div>
+
     </>
     );
 }

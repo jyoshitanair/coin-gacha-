@@ -49,16 +49,18 @@ export default function Dashboard() {
     return(
         <>
         {page == "dashboard" && 
-            <>
+            <div className = "center">
             <Toaster/>
-            <p> welcome to the app</p>
-            <p> This is you! </p>
-            <p> Email: {email}</p>
-            <p> UUID: {uuid} </p>
-            <button disabled = {processing} onClick={() => setPage("gamble")}> Gamble</button>
-            <button disabled = {processing} onClick={() => Logout()}> Logout</button>
-            <button disabled = {processing} onClick = {() => setPage("flashcards")}> Flashcards</button>
-            </>
+            <h1 className = "maintext"> welcome to the app</h1>
+            <div id = "information">
+                <h1 class = "smallh1"> Your Information: </h1>
+                <p style = {{padding_left: '40px'}}>Email: {email}</p>
+                <p style = {{padding_left: '40px'}}>UUID: {uuid} </p>
+            </div>
+            <button className = "buttons_normal" disabled = {processing} onClick={() => setPage("gamble")}> Gamble</button>
+            <button className = "buttons_normal" disabled = {processing} onClick = {() => setPage("flashcards")}> Flashcards</button>
+            <button className = "accent_button" disabled = {processing} onClick={() => Logout()}> Logout</button>
+            </div>
         }
         {page == "login" && <Login />}
         {page == "gamble" && <Gamble uuid = {uuid}/>}

@@ -1,7 +1,7 @@
 :root {
   --text: #6b6375;
   --text-h: #08060d;
-  --bg: #fff;
+  --bg: #c084fc;
   --border: #e5e4e7;
   --code-bg: #f4f3ec;
   --accent: #aa3bff;
@@ -56,6 +56,7 @@
 }
 
 body {
+  background-color: #c084fc;
   margin: 0;
   scrollbar-width: none;
   overflow-y: auto;
@@ -130,6 +131,12 @@ code {
   width: 70vw;
   line-height: 150px;
 }
+.buttons_normal:disabled,.accent_button:disabled{
+  background-color: #948f94 !important;
+  color: #000000 !important;
+  border-color: #000000 !important;
+  transform: scale(1) !important;
+}
 .buttons_normal{
   margin: 0px auto;
   font-weight: bold;
@@ -198,9 +205,12 @@ code {
   display:flex;
   align-items: center;
   flex-direction: column;
-  background-color: #c084fc;
   width: 100vw;
   height: 100vh;
+}
+.special_button{
+  margin: -10px 250px !important;
+  margin-right: auto !important; 
 }
 #buttonSpacer{
   display:flex;
@@ -211,19 +221,31 @@ code {
 
 
 #fattest_div{
-  margin: 0px auto;
+  right: -20px;
+  bottom: 330px;
   position: relative;
-  width: 350px;
-  height: 350px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
-
+#p_combined{
+  position:absolute;
+  position-anchor: --anchor;
+  top: calc(anchor(center) - 150px);
+  left: calc(anchor(left) + 80px);
+}
+#p_combined p{
+  font-size: 15px;
+  font-weight: bold;
+}
 #imgContainer,#imgContainerdup{
+  anchor-name: --anchor;
   position: absolute;
   top:0; 
   left:0; 
-  width: 100%;
-  height: 100%;
   overflow:hidden;
+  width: 450px;
+  height: 450px;
 }
 #imgContainerdup img{
   /* so that they do not stack ontop of each other. absolute elements are invisible*/
@@ -231,9 +253,9 @@ code {
   top: 0; 
   left:0; 
   /* lol not rlly necessary because everything is the same size but okay */
-  object-fit: contain;
-  width: 100%;
-  height: 100%;
+  object-fit:contain;
+  width: 450px;
+  height: 450px;
 }
 #imgContainer img{
   /* so that they do not stack ontop of each other. absolute elements are invisible*/
@@ -302,4 +324,25 @@ code {
   border-style: solid;
   height: 60px;
   overflow: hidden; 
+}
+#information{
+  font-family:cursive;
+  border-color:#1d045c;
+  background-color: #66aaee;
+  padding: 40px;
+  border-radius: 60px;
+  border-width: 5px;
+  border-style: solid;
+  gap: 15px;
+  flex-direction: column;
+  display: flex;
+  justify-content:center;
+  align-items: flex-start; 
+  font-size:medium;
+  width: 70vw
+}
+.smallh1{
+  font-family:serif;
+  font-weight: bolder;
+  font-size:xx-large;
 }

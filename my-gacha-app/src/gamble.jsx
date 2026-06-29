@@ -153,11 +153,17 @@ export default function Gamble({uuid}) {
     return(
     <>
         {page == "gamble" && 
-        <>
-        <p> gamble </p>
-        <button disabled = {processing} onClick = {() => createChar()}> pull! </button>
-        <button onClick = {() => setPage("dashboard")}> Dashboard</button>
-        <button onClick = {() => setPage("table")}> View All</button>
+        <div className = "center">
+        <h1 className = "maintext"> gamble </h1>
+        <button className = "special_button buttons_normal" disabled = {processing} onClick = {() => createChar()}> Roll! </button>
+        <button className = "special_button buttons_normal" onClick = {() => setPage("dashboard")}> Dashboard</button>
+        <button className = "special_button accent_button" onClick = {() => setPage("table")}> View All Rolls </button>
+        {gacha.rarity != 0 &&
+            <div id = "p_combined">
+                <p >Congrats you rolled #{gacha.gacha_id}</p>
+                <p>Rarity: {gacha.rarity}/5</p>
+            </div>
+        }
         <div id = "fattest_div">
             {processing &&
             <>
@@ -173,8 +179,6 @@ export default function Gamble({uuid}) {
             }
             {gacha.rarity != 0 &&
             <>
-                <p>Congrats you rolled #{gacha.gacha_id}</p>
-                <p>Rarity #{gacha.rarity}</p>
                 <div id = "imgContainerdup">
                     <img src = {images[`body_${gacha.body}`]} className = "body_img"/>
                     <img src = {images[`accessories_${gacha.accessories}`]} className = "accessories_img"/>
@@ -185,7 +189,7 @@ export default function Gamble({uuid}) {
                 </div>  
             </>}
         </div>
-        </>}
+        </div>}
         {page == "dashboard" && <Dashboard/>}
         {page == "table" && <Table uuid = {uuid}/>}
     </>

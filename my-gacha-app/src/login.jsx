@@ -27,10 +27,12 @@ export default function Login() {
         e.preventDefault();
         if (!email || !password){
             toast.error("Missing Fields");
+            setProcessing(false)
             return;
         }
         if (!captchaToken) {
             toast.error("Complete your captcha first!");
+            setProcessing(false)
             return;
         }
         {/* this makes it so that the form doesnt refresh and lose all data
@@ -56,9 +58,8 @@ export default function Login() {
     }
     return (
         <>
-         <div  className = "center" >
             {page == "login" && 
-            <>
+            <div  className = "center" >
             <Toaster className = "toaster"/>
             <h1 className = "maintext" > login page</h1>
             <form onSubmit={handleLogin} className = "form">
@@ -110,11 +111,10 @@ export default function Login() {
                 <button disabled = {processing} className = "buttons_normal" type="submit" >Let's go!</button>
             </form>
             <button disabled = {processing} className = "accent_button"  type = "button" onClick ={() => setPage("signup")}>Sign up?</button>
-            </>
+            </div>
             }
             {page == "signup" && <Signup />}
             {page == "dashboard" && <Dashboard/>}
-        </div>
         </>
         
     );
