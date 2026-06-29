@@ -1,6 +1,7 @@
 import React, {useState, useEffect} from 'react';
 import Gamble from './gamble.jsx'
-
+//image
+import image from "./assets_p2/Illustration121.PNG"
 //supabase
 import { createClient } from '@supabase/supabase-js'
 const supabaseUrl = import.meta.env.VITE_SUPABASE_URL
@@ -67,8 +68,9 @@ export default function Table({uuid}) {
                             <div className = "grid_item">
                                     <p className = "smallp">GachaID: {pull.gacha_id}</p>
                                     <p className = "smallp">Rarity: {pull.rarity}/5</p>
-                                    <p><img className = "small_img" src = {pull.img}/></p>
+                                    <img className = "small_img" src = {pull.img}/>
                             </div>))}
+                    <img className = "shelf" src = {image}/>
                     </div>
                     <button 
                     className = "buttons_normal" 

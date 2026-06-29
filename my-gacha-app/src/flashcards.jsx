@@ -18,7 +18,7 @@ export default function Flashcards({uuid}) {
         if (error){
             toast.error(error.message)
         }else{
-            let newCoinCount = 1;
+            let newCoinCount = 0;
             if (data){
                 if(tof == false){
                     newCoinCount = data.coins;
