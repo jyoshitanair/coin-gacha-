@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react';
 import Dashboard from './dashboard.jsx'
 import Table from './table.jsx'
 import html2canvas from 'html2canvas';
+import toast, {Toaster} from 'react-hot-toast'
+import Flashcards from './flashcards.jsx'
 //supabase
 import { createClient } from '@supabase/supabase-js'
 const supabaseUrl = import.meta.env.VITE_SUPABASE_URL
@@ -30,9 +32,26 @@ const images = Object.fromEntries(
         return [finalName,module.default]
     }));
 export default function Gamble({uuid}) {
-    const [page,setPage] = useState("gamble")
-    const [load,setLoad] = useState(0)
-    const [processing,setProcessing] = useState(false)
+    const [page,setPage] = useState("gamble");
+    const [load,setLoad] = useState(0);
+    const [processing,setProcessing] = useState(false);
+    const [coins, setCoins] = useState(0);
+    //check the coins 
+    useEffect(() => {updateCoinCount()}, [])
+    async function updateCoinCount() {
+        const {data, error} = await supabase.from("coin_data").select('coins').eq("uuid", uuid).maybeSingle() //return an object not array and null if nothing
+        if (error){
+            toast.error(error.message)
+        }else{
+            let newCoinCount = data.coins;
+            const {error} = await supabase.from("coin_data").upsert({uuid: uuid, coins: newCoinCount})
+            if (error){
+                toast.error(error.message);
+                return;
+            }
+            setCoins(newCoinCount)
+        }
+    }
     //store the img
     useEffect(() => {
         if(load == 6){
@@ -149,14 +168,34 @@ export default function Gamble({uuid}) {
        }
        newChar["rarity"] = rarity
        setGacha(newChar)
+       //subtract from db 
+       async function updateCoinCount() {
+            const {data, error} = await supabase.from("coin_data").select('coins').eq("uuid", uuid).maybeSingle() //return an object not array and null if nothing
+            if (error){
+                toast.error(error.message)
+            }else{
+                let newCoinCount = data.coins - 10;
+                const {error} = await supabase.from("coin_data").upsert({uuid: uuid, coins: newCoinCount})
+                if (error){
+                    toast.error(error.message);
+                    return;
+                }
+                setCoins(newCoinCount)
+            }
+        }
+        updateCoinCount()
+
     };
     return(
     <>
         {page == "gamble" && 
         <div className = "center">
+        <Toaster/>
         <h1 className = "maintext"> gamble </h1>
-        <button className = "special_button buttons_normal" disabled = {processing} onClick = {() => createChar()}> Roll! </button>
+        <p> Coins: {coins} </p>
+        <button className = "special_button buttons_normal" disabled = {processing || (coins<10)} onClick = {() => createChar()}> {coins <=10? "Insufficent Funds":"Roll(10 Coins)"} </button>
         <button className = "special_button buttons_normal" onClick = {() => setPage("dashboard")}> Dashboard</button>
+        <button className = "special_button buttons_normal" onClick = {() => setPage("flashcards")}> Get More Coins?</button>
         <button className = "special_button accent_button" onClick = {() => setPage("table")}> View All Rolls </button>
         {gacha.rarity != 0 &&
             <div id = "p_combined">
@@ -192,6 +231,7 @@ export default function Gamble({uuid}) {
         </div>}
         {page == "dashboard" && <Dashboard/>}
         {page == "table" && <Table uuid = {uuid}/>}
+        {page == "flashcards" && <Flashcards uuid = {uuid}/>}
     </>
     );
 }

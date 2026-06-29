@@ -58,13 +58,13 @@ export default function Dashboard() {
                 <p style = {{padding_left: '40px'}}>UUID: {uuid} </p>
             </div>
             <button className = "buttons_normal" disabled = {processing} onClick={() => setPage("gamble")}> Gamble</button>
-            <button className = "buttons_normal" disabled = {processing} onClick = {() => setPage("flashcards")}> Flashcards</button>
+            <button className = "buttons_normal" disabled = {processing} onClick = {() => setPage("flashcards")}> Get More Coins?</button>
             <button className = "accent_button" disabled = {processing} onClick={() => Logout()}> Logout</button>
             </div>
         }
         {page == "login" && <Login />}
         {page == "gamble" && <Gamble uuid = {uuid}/>}
-        {page == "flashcards" && <Flashcards />}
+        {page == "flashcards" && <Flashcards uuid = {uuid}/>}
         </>
     );
 }
