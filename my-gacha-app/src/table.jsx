@@ -12,7 +12,6 @@ export default function Table({uuid}) {
     const [pulls, setPulls] = useState(null)
     const [page, setPage] = useState("table")
     const [pageNumber, setPageNumber] = useState(1)
-    const [disabled, setDisabled] = useState(false)
     useEffect(() => {
         async function get_pulls(){
         setLoading(true)
@@ -29,13 +28,9 @@ export default function Table({uuid}) {
     }, []) 
     //setting up page returning
     const lastItemIndex = pageNumber *9;
+    const firstItemIndex = lastItemIndex-9;
     const currentPulls = calculatePulls();
     const totalPages = calculatePages();
-    useEffect(() => {
-        if(pageNumber == totalPages){
-            setDisabled(true);
-        }
-    },[pageNumber])
     function calculatePages() {
         if(pulls){
             return Math.ceil((pulls.length)/9) //always need to round up a page
@@ -47,7 +42,7 @@ export default function Table({uuid}) {
         if(pulls){
             //slices at a start and end
             //pulls alr filtered to only show UR pulls
-            return pulls.slice(pageNumber,lastItemIndex)
+            return pulls.slice(firstItemIndex,lastItemIndex);
         }else{
             return [];
         }
@@ -57,25 +52,41 @@ export default function Table({uuid}) {
         <>
             {loading == true &&
                 <>
-                    <p> Loading... </p>
+                    <p className = "maintext"> Loading... </p>
                 </>
             }
             {page == "table" && loading == false &&
-                <>
+                <div className = "center">
+                    <h1 className = "maintext" > All Pulls</h1>
+                    <button 
+                    className = "buttons_normal" 
+                    onClick = {() => setPage("gamble")}
+                    >Gamble</button>
                     <div className = "grid_container">
-                        {pulls && pulls.map((pull) => (
+                        {currentPulls && currentPulls.map((pull) => (
                             <div className = "grid_item">
-                                <tbody>
-                                    <tr>{pull.gacha_id}</tr>
-                                    <tr>{pull.rarity}</tr>
-                                    <tr><img className = "small_img" src = {pull.img}/></tr>
-                                </tbody>
+                                    <p className = "smallp">GachaID: {pull.gacha_id}</p>
+                                    <p className = "smallp">Rarity: {pull.rarity}/5</p>
+                                    <p><img className = "small_img" src = {pull.img}/></p>
                             </div>))}
                     </div>
-                    <button className = "buttons_normal" disabled = {disabled}>Next</button>
+                    <button 
+                    className = "buttons_normal" 
+                    disabled = {pageNumber >= totalPages}
+                    onClick = {() => {
+                        setPageNumber(prev => (Math.min(prev + 1, totalPages)))
+                    }}
+                    >Next</button>
+                    <button 
+                    className = "buttons_normal" 
+                    disabled = {pageNumber <= 1}
+                    onClick = {() => {
+                        setPageNumber(prev => (Math.max(prev - 1, 1)))
+                    }}
+                    >Previous</button>
                         
                         
-                </>
+                </div>
             }
             {page == "gamble" && <Gamble uuid = {uuid}/>}
         </>
