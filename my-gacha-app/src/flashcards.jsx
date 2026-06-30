@@ -49,10 +49,10 @@ export default function Flashcards({uuid}) {
     <>
         {page == "flashcards" && <div className = "center">
             <Toaster/>
-            <h1 className = "maintext"> Get more Coins </h1>
+            <h1 className = "maintext"> More Coins! </h1>
             <p className = "otherp"> Total Coins : {coins}</p>
             <p className = "mediump"> here is a button that increases your coins!</p>
-            <button disabled = {loading} className = "accent_button" onClick={() => updateCoinCount(true)}> Coin Clicker!</button>
+            <button disabled = {loading} className = "accent_button" onClick={() => updateCoinCount(true)}> Click me!</button>
             <button disabled = {loading} className = "buttons_normal" onClick={() => setPage("gamble")}> Gamble</button>
             <button disabled = {loading} className = "buttons_normal" onClick={() => setPage("dashboard")}> Dashboard</button>
         </div>}
