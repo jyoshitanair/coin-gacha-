@@ -87,7 +87,7 @@ export default function Gamble({uuid}) {
                             img: imgString
                         }])
                     if (error){
-                        alert(error.message);
+                        toast.error(error.message);
                         setProcessing(false);
                         return;
                     }

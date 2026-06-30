@@ -56,7 +56,7 @@ export default function Signup() {
             <div className = "center">
             <Toaster className = "toaster"/>
             <h1 className = "maintext">Sign Up</h1>
-            <form className = "form">
+            <form className = "form" onSubmit = {handleSignup}>
                 <input
                 disabled = {processing}
                 className = "inputs"
@@ -99,7 +99,7 @@ export default function Signup() {
                         }}
                     />
                 </>}
-                <button disabled = {processing} className = "buttons_normal" type = "submit" onClick = {handleSignup}> Sign up </button>
+                <button disabled = {processing} className = "buttons_normal" type = "submit"> Sign up </button>
 
             </form>
             <button disabled = {processing} className = "accent_button" type = "button" onClick = {( ) => setPage("login")}> Login </button>

@@ -9,6 +9,9 @@ const supabaseKey = import.meta.env.VITE_SUPABASE_PUBLISHABLE_KEY
 const supabase = createClient(supabaseUrl, supabaseKey)
 
 export default function Flashcards({uuid}) {
+    const [page, setPage] = useState("flashcards");
+    const [coins, setCoins] = useState(0);
+    const [loading, setLoading] = useState(false);
     useEffect(() => {
         updateCoinCount(false);
     }, []);
@@ -16,7 +19,8 @@ export default function Flashcards({uuid}) {
         setLoading(true)
         const {data, error} = await supabase.from("coin_data").select('coins').eq("uuid", uuid).maybeSingle() //return an object not array and null if nothing
         if (error){
-            toast.error(error.message)
+            toast.error(error.message);
+            setLoading(false);
         }else{
             let newCoinCount = 0;
             if (data){
@@ -24,6 +28,11 @@ export default function Flashcards({uuid}) {
                     newCoinCount = data.coins;
                 }else{
                     newCoinCount = data.coins+1;
+                }
+            }else{
+                //user is null insert new row
+                if(tof == true){
+                    newCoinCount += 1;
                 }
             }
             const {error} = await supabase.from("coin_data").upsert({uuid: uuid, coins: newCoinCount})
@@ -36,20 +45,17 @@ export default function Flashcards({uuid}) {
             setLoading(false);
         }
     }
-    const [page, setPage] = useState("flashcards");
-    const [coins, setCoins] = useState(0);
-    const [loading, setLoading] = useState(false);
     return(
     <>
-        {page == "flashcards" && <>
+        {page == "flashcards" && <div className = "center">
             <Toaster/>
-            <h1 class = "smallh1"> Get more Coins </h1>
-            <p> Total Coins : {coins}</p>
-            <p> here is a button that increases your coins!</p>
+            <h1 className = "maintext"> Get more Coins </h1>
+            <p className = "otherp"> Total Coins : {coins}</p>
+            <p className = "mediump"> here is a button that increases your coins!</p>
             <button disabled = {loading} className = "accent_button" onClick={() => updateCoinCount(true)}> Coin Clicker!</button>
             <button disabled = {loading} className = "buttons_normal" onClick={() => setPage("gamble")}> Gamble</button>
             <button disabled = {loading} className = "buttons_normal" onClick={() => setPage("dashboard")}> Dashboard</button>
-        </>}
+        </div>}
         {page == "dashboard" && <Dashboard/>}
         {page == "gamble" && <Gamble uuid = {uuid}/>}
     </>

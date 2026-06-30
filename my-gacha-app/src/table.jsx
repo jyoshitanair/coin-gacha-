@@ -1,5 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import Gamble from './gamble.jsx'
+import toast, {Toaster} from 'react-hot-toast'
 //image
 import image from "./assets_p2/Illustration121.PNG"
 //supabase
@@ -9,24 +10,11 @@ const supabaseKey = import.meta.env.VITE_SUPABASE_PUBLISHABLE_KEY
 const supabase = createClient(supabaseUrl, supabaseKey)
 
 export default function Table({uuid}) {
+    //usestate
     const [loading, setLoading] = useState(true)
     const [pulls, setPulls] = useState(null)
     const [page, setPage] = useState("table")
     const [pageNumber, setPageNumber] = useState(1)
-    useEffect(() => {
-        async function get_pulls(){
-        setLoading(true)
-        const {data, error} = await supabase.from("user_pulls").select('*').eq("user", uuid).order("id", {ascending:false})
-        if (error){
-            alert(error.message)
-        }
-        if (data){
-            setPulls(data)
-        }
-        setLoading(false)
-        }
-        get_pulls()
-    }, []) 
     //setting up page returning
     const lastItemIndex = pageNumber *9;
     const firstItemIndex = lastItemIndex-9;
@@ -48,6 +36,27 @@ export default function Table({uuid}) {
             return [];
         }
     }
+    useEffect(() => {
+        async function get_pulls(){
+        setLoading(true)
+        const {data, error} = await supabase.from("user_pulls").select('*').eq("user", uuid).order("id", {ascending:false})
+        if (error){
+            toast.error(error.message)
+        }
+        if (data){
+            setPulls(data)
+        }
+        setLoading(false)
+        }
+        get_pulls()
+    }, [uuid]) 
+    //incase users a spam paging wierd?
+    useEffect(() => {
+        if (pageNumber > totalPages){
+            //better not exceed it!
+            setPageNumber(totalPages);
+        }
+    }, [totalPages,pageNumber])
     
     return(
         <>
@@ -58,6 +67,7 @@ export default function Table({uuid}) {
             }
             {page == "table" && loading == false &&
                 <div className = "center">
+                    <Toaster/>
                     <h1 className = "maintext" > All Pulls</h1>
                     <button 
                     className = "buttons_normal" 
@@ -65,7 +75,7 @@ export default function Table({uuid}) {
                     >Gamble</button>
                     <div className = "grid_container">
                         {currentPulls && currentPulls.map((pull) => (
-                            <div className = "grid_item">
+                            <div  key = {pull.id} className = "grid_item">
                                     <p className = "smallp">GachaID: {pull.gacha_id}</p>
                                     <p className = "smallp">Rarity: {pull.rarity}/5</p>
                                     <img className = "small_img" src = {pull.img}/>

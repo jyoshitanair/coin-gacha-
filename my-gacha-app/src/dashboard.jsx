@@ -17,16 +17,20 @@ export default function Dashboard() {
     const [processing, setProcessing] = useState(false)
     //function, array [] = once [dependency], when the dependency changes
     useEffect(() => {
+        setProcessing(true);
         async function getUser() {
-            console.log(await supabase.auth.getUser())
             //takes the data and puts it in the user var
             const {data: {user}} = await supabase.auth.getUser()
             if (user) {
                 setUuid(user.id)
                 setEmail(user.email)
+                setProcessing(false);
             }else{
-                alert("no user? what!?")
+                toast.error("User not signed in.")
+                setTimeout(() => {
                 setPage("login")
+                setProcessing(false)
+                },1500)
             }
         }
         getUser()
@@ -53,9 +57,9 @@ export default function Dashboard() {
             <Toaster/>
             <h1 className = "maintext"> welcome to the app</h1>
             <div id = "information">
-                <h1 class = "smallh1"> Your Information: </h1>
-                <p style = {{padding_left: '40px'}}>Email: {email}</p>
-                <p style = {{padding_left: '40px'}}>UUID: {uuid} </p>
+                <h1 className = "smallh1"> Your Information: </h1>
+                <p style = {{paddingLeft: '40px'}}>Email: {email}</p>
+                <p style = {{paddingLeft: '40px'}}>UUID: {uuid} </p>
             </div>
             <button className = "buttons_normal" disabled = {processing} onClick={() => setPage("gamble")}> Gamble</button>
             <button className = "buttons_normal" disabled = {processing} onClick = {() => setPage("flashcards")}> Get More Coins?</button>

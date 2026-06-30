@@ -396,3 +396,10 @@ code {
   padding-bottom: 40px;
   padding-top: 20px;
 }
+.mediump{
+  font-family:serif;
+  font-weight: bolder;
+  font-size:large;
+  margin-top: -100px;
+  padding-top: 80px;
+}
