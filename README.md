@@ -1,2 +1,145 @@
-# coin-gacha-
-a productive flashcard gambling website. get things right - spend them on gachapon!
+# Pocket Beasts
+
+##### A website where you can click to earn coins to spend on collecting cute monsters that you store on your shelf!
+
+---
+
+### Contents
+
+* [Access](#access)
+
+
+* [Description](#description)
+
+
+* [How to use?](#how-to-play)
+
+
+* [Features](#features)
+
+
+* [Ai Usage](#ai-usage)
+
+
+* [Learning](#learning)
+
+
+
+## ACCESS
+
+---
+* **Github Repo:** https://github.com/jyoshitanair/coin-gacha-
+
+* **Vercel Link:** https://coin-gacha.vercel.app/
+(no installation!)
+
+	
+## DESCRIPTION
+#### Creation Details
+---
+* by: **jyoshitanair** (github)
+
+
+* project name: **Pocket Beasts** 
+
+
+* made with: **React** in VS Code
+
+
+* deployed to *Vercel*
+
+
+#### Quick Overview
+---
+We all love to gamble. yeah we... so when the debts catch up to you i present to you the alternative: Pocket Beasts.
+There are literally 3.2 million combinations of monsters that you can get! (quick math here: (9x9x9x20x20x11 = 3,207,600)
+And 78 different assets for these sometimes cute critters that I drew! You can click on a button to get more coins and keep gambling as you search for higher rarities! It also features a very cute cat font that I drew :P
+
+## HOW TO USE
+* first signup!
+* then you have to verify your email.
+* then you have to log in.
+* then you will go to your dashboard! there click on get more coins
+* spam that button and gain coins!
+* go back to the gambling tab and gamble your earnings away.
+* repeat and search for the rarity 5 possiblities!
+* once you are done head back to the dashboard and log out!
+
+## FEATURES
+---
+* **Backend by Supabase**
+1) controls login, signout, and signup
+2) used queries like selecting, inserting, and upserting! and searching with eq
+3) Supabase runs on Postgres so all this was postres queries!
+4) I made 3 policies for updating, reading, and editing!
+5) Features two tables to track the gacha pulls and the user's coin count
+
+---
+* **Captchas by Cloudflare:**
+1) Captchas that are *less* annoying! You no longer need to complete those annoying click the boxes
+2) Powered by cloudflare!
+3) They reload when the user enters the wrong fields but NOT when the user doesn't fill in all the blanks
+4) They reload because when the state of the captcha token changes from null they get reconstructed.
+
+---
+* **Toaster:**	
+1) A intresting library that allows for popups to be created MUCH easier than manually styling alerts with CSS
+2) I used it for all my alerts and it looks very professional! with minimal code written!
+
+---
+* **Shelf:**	
+1) A cute shelf that stores all your gacha!
+2) The shelf has a fixed height and using slice() the gacha that it should display is dynamically calculated
+3) You can also see the gacha id (unique to every unique gacha) and rarity on the shelf (ooh!)
+
+---
+* **Cool font:**
+1) A cool font I made on calligraphr
+2) Has 52 characters that I drew
+
+---
+* **Dashboard:**
+1) displays your email and uuid (unique to each user)
+2) you can also gamble, head to flashcards, or logout here
+
+---
+* **Get more coins:**
+1) A button that lets you..get more coins
+2) Freezes when data is being sent to the database sorry its so slow!
+---
+
+## AI USAGE: 
+* Gemini for debugging and learning!
+* I learned about useState, useEffect, upsert, and more from AI!
+* But in the end all code and core concepts are written authentically by me!
+* All the art is done by me (<3 i hope you likee itt)
+* And of course this read me is written by the one and only me :P
+
+## LEARNING:
+
+
+### Learned:
+---
+1) This was my first every react project and website
+2) I knew a bit of html/css before this but not much js. now i definetly know a lot more and feel comfortable with it too!
+3) I learned how to use supabase, toaster, html2canvas (to take screenshots of the gacha) and much more!
+4) I learned about new js tools like useState and useEffect!
+5) I learned how to set up a vercel site
+6) I got more familiar with flex (my greatest opp...) and css
+7) I learned about tables and grids (actually never used them before)
+
+### Struggles :
+	
+---
+1) **The gambling page.** As you'd expect this took up a bulk of the time. It was so hard to have everything stack ontop of each other and I was so confused how I'd store the state when the user spam clicked. That's why there are two div containers for the image - one the use sees and one that is only used to take a split second screenshot using html2 canvas that is then stored in the db. A lot of this was a logic race and a PAIN to debug. I also learned a lot about the Object class and mapping stuff and using glob for the image path (also a pain because I kept messing up the path T-T)
+2) **The table.** Uh formatting the css was terrible for this. I'm sure there's a better way out there but I just kept guessing things and hoping the shelf would end up the way I wanted. I was also learning how to use a grid so I found it kind of confusing.
+In the end though it turned out amazing and I'm glad I took the time to make it look like a shelf instead of leaving it a plain table.
+scaled down/up nodes everywhere this was a guess and check process! 
+3) **The captchas..** For some reason they wouldn't reset when the fields were wrong. So there are actually two captchas on every page so that they get recreacted when there is an error and the field is set to null again. This seems simple but it actually took me forever and crazy logic to get to.
+of the nodes and dynamically connect multiple files (mainly fish,shark,and start) to return to how it was at the start
+4) **the formula...**  Sure it seems simple enough to randomly generate images right. WRONG. tell me why there was so much probability math involved? At some point I just guessed formulas until one seemed to work and I had to be reminded of permutations again. This made me sad. I also made the rarity to get a 5 realllly hard like less than one percent. So if you get a 5 you are reallllyyy lucky. 
+
+*...and more but those are the big ones*
+
+
+*Made with 💖 by jyoshita!*

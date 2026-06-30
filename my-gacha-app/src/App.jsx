@@ -11,7 +11,7 @@ function App() {
     <>
     {currentPage == "home >-<" &&
       <div className = "center" >
-        <h1 className = "maintext"> Welcome to Gacha Coins </h1>
+        <h1 className = "maintext"> Welcome to Pocket Beasts </h1>
         {/*{} makes you to to javascript! 
         () make a function
         arrow function makes it run later*/}
@@ -19,7 +19,7 @@ function App() {
           <button className = "buttons" type = "button" onClick = {() => setCurrentPage("login")}>  Login  </button>
           <button className = "buttons" type = "button" onClick = {() => setCurrentPage("signup")}> Sign Up </button>
         </div>
-        <p> Spend your coins to collect as many cute characters as you can! </p>
+        <p> Spend your coins to collect as many cute monsters as you can! </p>
       </div>
       }
       {/* in react u cant use if statements, the one on the right will run if true*/}
