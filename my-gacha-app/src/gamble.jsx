@@ -4,6 +4,8 @@ import Table from './table.jsx'
 import html2canvas from 'html2canvas';
 import toast, {Toaster} from 'react-hot-toast'
 import Flashcards from './flashcards.jsx'
+//image
+import image from "./assets_p2/Illustration122.PNG"
 //supabase
 import { createClient } from '@supabase/supabase-js'
 const supabaseUrl = import.meta.env.VITE_SUPABASE_URL
@@ -198,7 +200,7 @@ export default function Gamble({uuid}) {
                     return;
                 }
                 setProcessing(false);
-                setCoins(newCoinCount)
+                setCoins(newCoinCount1)
             }
         }
         subtractCoins()
@@ -210,7 +212,8 @@ export default function Gamble({uuid}) {
         <div className = "center">
         <Toaster/>
         <h1 className = "maintext"> gamble </h1>
-        <p> Coins: {coins} </p>
+        <img className = "gumballimg" src = {image}/>
+        <p className = "otherp"> Coins: {coins} </p>
         <button className = "special_button buttons_normal" disabled = {processing || (coins<10)} onClick = {() => createChar()}> {coins <10? "Insufficent Funds":"Roll(10 Coins)"} </button>
         <button className = "special_button buttons_normal"  disabled = {processing} onClick = {() => setPage("dashboard")}> Dashboard</button>
         <button className = "special_button buttons_normal" disabled = {processing} onClick = {() => setPage("flashcards")}> Get More Coins?</button>
