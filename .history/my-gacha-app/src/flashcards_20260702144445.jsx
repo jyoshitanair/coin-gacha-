@@ -1,7 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import Gamble from './gamble.jsx'
 import Dashboard from './dashboard.jsx'
-import Newset from './newset.jsx'
 import toast, {Toaster} from 'react-hot-toast'
 //supabase
 import { createClient } from '@supabase/supabase-js'
@@ -54,13 +53,12 @@ export default function Flashcards({uuid}) {
             <p className = "otherp"> Total Coins : {coins}</p>
             <p className = "mediump"> here is a button that increases your coins!</p>
             <button disabled = {loading} className = "accent_button" onClick={() => updateCoinCount(true)}> Click me!</button>
-            <button disabled = {loading} className = "buttons_normal" onClick={() => setPage("newset")}> New Set</button>
+            <button disabled = {loading} className = "accent_button" onClick={() => updateCoinCount(true)}> Click me!</button>
             <button disabled = {loading} className = "buttons_normal" onClick={() => setPage("gamble")}> Gamble</button>
             <button disabled = {loading} className = "buttons_normal" onClick={() => setPage("dashboard")}> Dashboard</button>
         </div>}
         {page == "dashboard" && <Dashboard/>}
         {page == "gamble" && <Gamble uuid = {uuid}/>}
-        {page == "newset" && <Newset uuid = {uuid}/>}
     </>
     );
 }

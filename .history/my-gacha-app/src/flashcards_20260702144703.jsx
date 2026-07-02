@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from 'react';
 import Gamble from './gamble.jsx'
 import Dashboard from './dashboard.jsx'
-import Newset from './newset.jsx'
+import Newset from './gamble.jsx'
 import toast, {Toaster} from 'react-hot-toast'
 //supabase
 import { createClient } from '@supabase/supabase-js'
