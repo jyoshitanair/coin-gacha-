@@ -52,7 +52,7 @@
 #### Quick Overview
 ---
 We all love to gamble. yeah we... so when the debts catch up to you i present to you the alternative: Pocket Beasts.
-There are literally 3.2 million combinations of monsters that you can get! (quick math here: (9x9x9x20x20x11 = 3,207,600)
+There are literally 3.2 million combinations of monsters that you can get! - quick math here: 9x9x9x20x20x11 = 3,207,600
 And 78 different assets for these sometimes cute critters that I drew! You can click on a button to get more coins and keep gambling as you search for higher rarities! It also features a very cute cat font that I drew :P
 
 ## HOW TO USE
