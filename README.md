@@ -57,7 +57,6 @@ And 78 different assets for these sometimes cute critters that I drew! You can c
 
 ## HOW TO USE
 * first signup!
-* then you have to verify your email.
 * then you have to log in.
 * then you will go to your dashboard! there click on get more coins
 * spam that button and gain coins!
