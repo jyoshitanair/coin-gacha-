@@ -1,0 +1,19 @@
+import React, {useState} from 'react';
+export default function Newset() {
+    const [title, setTitle] = useState("");
+    const [processing, setProcessing] = useState("Untitled");
+return(
+    <div>
+    <form className = "form" onSubmit = {}>
+        <input
+            disabled = {processing}
+            className = "inputs"
+            type = "password"
+            placeholder = "enter password"
+            value = {password}
+            onChange = {(e) => setPassword(e.target.value)}
+            />
+    </form>
+    </div>
+);
+}

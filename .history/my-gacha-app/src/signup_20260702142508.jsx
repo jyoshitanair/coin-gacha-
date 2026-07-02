@@ -38,7 +38,7 @@ export default function Signup() {
         )
         if (error){
             if (error.message == "Password should be at least 6 characters. Password should contain at least one character of each: abcdefghijklmnopqrstuvwxyz, ABCDEFGHIJKLMNOPQRSTUVWXYZ, 0123456789, !@#$%^&*()_+-=[]{};':\"|<>?,./`~."){
-                toast.error("You need: 6+ characters, 1+ lowercase, 1+ uppercase, 1+ number, and 1+ special character.");
+                toast.error("Has to be 6+ characters, 1+");
             
             }else{
                 toast.error(error.message);
