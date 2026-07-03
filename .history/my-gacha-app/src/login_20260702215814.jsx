@@ -81,7 +81,7 @@ export default function Login() {
                     className = "inputs"
                     type="password"
                     minLength={1}
-                    maxlength={25}
+                maxlength={25}
                     placeholder="enter password"
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}

@@ -3,18 +3,18 @@ export default function Newset(uuid) {
     const [title, setTitle] = useState("");
     const [description, setDescription] = useState("");
     const [processing, setProcessing] = useState(false);
-    //term,description
-    const [flashcards,setFlashcards] = useState([]);
+    const [flashcardNumber, setFlashcardNumber] = useState(0);
+    const values_array = [];
     //functiones
     function logFlashcards() {
         <p> hi!</p>
     }
     function reRenderCards() {
         const terms = [];
-        for (let i = 0; i <= flashcards.length-1; i++) {
+        for (let i = 1; i <= flashcardNumber; i++) {
             terms.push(
                 <div>
-                    <h5> Flashcard # {i+1}</h5>
+                    <h5> Flashcard # {i}</h5>
                     <p> Term:</p>
                     <input
                         disabled={processing}
@@ -22,14 +22,7 @@ export default function Newset(uuid) {
                         minLength={1}
                         maxlength={50}
                         placeholder="enter term"
-                        value = {flashcards[i].term}
-                        onChange={(e) => {
-                            setFlashcards(prev => {
-                                const temp = [...prev];
-                                temp[i] = {...temp[i], term:e.target.value};
-                                return temp
-                            })
-                        }}
+                        onChange={(e) => {(values_array[i-1][0]) = e.target.value}}
                     />
                     <p> Definition:</p>
                     <input
@@ -38,19 +31,11 @@ export default function Newset(uuid) {
                         minLength={1}
                         maxlength={50}
                         placeholder="enter definition"
-                        value = {flashcards[i].definition}
-                        onChange={(e) => {
-                            setFlashcards(prev => {
-                                const temp = [...prev];
-                                temp[i] = {...temp[i], definition:e.target.value};
-                                return temp
-                            })
-                        }}
+                        onChange={(e) => setTitle(e.target.value)}
                     />
                 </div>
             )
         }
-        console.log(flashcards);
         return terms;
     }
     return (
@@ -81,9 +66,7 @@ export default function Newset(uuid) {
                         reRenderCards()
                     }
                 </div>
-                <button type="button" onClick={() => {
-                    setFlashcards(prev => [...prev, {term: "", definition: ""}])
-                }}> New Term</button>
+                <button type="button" onClick={() => setFlashcardNumber(prev => prev +1)}> New Term</button>
                 <button type="submit"> Create!</button>
             </form>
         </div>

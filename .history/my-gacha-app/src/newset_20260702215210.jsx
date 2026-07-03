@@ -11,10 +11,10 @@ export default function Newset(uuid) {
     }
     function reRenderCards() {
         const terms = [];
-        for (let i = 0; i <= flashcards.length-1; i++) {
+        for (let i = 1; i <= flashcards.length; i++) {
             terms.push(
                 <div>
-                    <h5> Flashcard # {i+1}</h5>
+                    <h5> Flashcard # {i}</h5>
                     <p> Term:</p>
                     <input
                         disabled={processing}
@@ -22,11 +22,10 @@ export default function Newset(uuid) {
                         minLength={1}
                         maxlength={50}
                         placeholder="enter term"
-                        value = {flashcards[i].term}
                         onChange={(e) => {
                             setFlashcards(prev => {
                                 const temp = [...prev];
-                                temp[i] = {...temp[i], term:e.target.value};
+                                temp[i-1] = {...temp, definition:e.target.value};
                                 return temp
                             })
                         }}
@@ -38,11 +37,10 @@ export default function Newset(uuid) {
                         minLength={1}
                         maxlength={50}
                         placeholder="enter definition"
-                        value = {flashcards[i].definition}
                         onChange={(e) => {
                             setFlashcards(prev => {
-                                const temp = [...prev];
-                                temp[i] = {...temp[i], definition:e.target.value};
+                                const temp = {...prev};
+                                temp[i-1] = {...temp, definition:e.target.value};
                                 return temp
                             })
                         }}
@@ -50,7 +48,6 @@ export default function Newset(uuid) {
                 </div>
             )
         }
-        console.log(flashcards);
         return terms;
     }
     return (

@@ -39,7 +39,7 @@ export default function Login() {
         only grab the value of error*/}
         const { error } = await supabase.auth.signInWithPassword(
             {
-                username: username,
+                email: email,
                 password: password,
                 options: {captchaToken},
             }
@@ -69,19 +69,15 @@ export default function Login() {
                 <input
                     disabled = {processing}
                     className = "inputs"
-                    type="text"
-                    minLength={1}
-                    maxlength={15}
-                    placeholder="enter username"
-                    value={username}
-                    onChange={(e) => setUsername(e.target.value)}
+                    type="email"
+                    placeholder="enter email"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
                 />
                 <input
                     disabled = {processing}
                     className = "inputs"
                     type="password"
-                    minLength={1}
-                    maxlength={25}
                     placeholder="enter password"
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}

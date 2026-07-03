@@ -11,10 +11,10 @@ export default function Newset(uuid) {
     }
     function reRenderCards() {
         const terms = [];
-        for (let i = 0; i <= flashcards.length-1; i++) {
+        for (let i = ; i <= flashcards.length; i++) {
             terms.push(
                 <div>
-                    <h5> Flashcard # {i+1}</h5>
+                    <h5> Flashcard # {i}</h5>
                     <p> Term:</p>
                     <input
                         disabled={processing}
@@ -22,13 +22,8 @@ export default function Newset(uuid) {
                         minLength={1}
                         maxlength={50}
                         placeholder="enter term"
-                        value = {flashcards[i].term}
                         onChange={(e) => {
-                            setFlashcards(prev => {
-                                const temp = [...prev];
-                                temp[i] = {...temp[i], term:e.target.value};
-                                return temp
-                            })
+                            (flashcards[i-1]) = {...flashcards[i-1], term:e.target.value}
                         }}
                     />
                     <p> Definition:</p>
@@ -38,19 +33,13 @@ export default function Newset(uuid) {
                         minLength={1}
                         maxlength={50}
                         placeholder="enter definition"
-                        value = {flashcards[i].definition}
                         onChange={(e) => {
-                            setFlashcards(prev => {
-                                const temp = [...prev];
-                                temp[i] = {...temp[i], definition:e.target.value};
-                                return temp
-                            })
+                            (flashcards[i-1]) = {...flashcards[i-1], definition:e.target.value}
                         }}
                     />
                 </div>
             )
         }
-        console.log(flashcards);
         return terms;
     }
     return (

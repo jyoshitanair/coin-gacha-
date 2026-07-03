@@ -16,7 +16,7 @@ import Signup from './signup.jsx'
 
 export default function Login() {
     const [captchaToken, setCaptchaToken] = useState()
-    const [username, setUsername] = useState("");
+    const [username, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [page, setPage] = useState("login");
     const[processing, setProcessing] = useState(false);
@@ -25,7 +25,7 @@ export default function Login() {
         setProcessing(true)
         //e only for forms :3
         e.preventDefault();
-        if (!username || !password){
+        if (!email || !password){
             toast.error("Missing Fields");
             setProcessing(false)
             return;
@@ -39,7 +39,7 @@ export default function Login() {
         only grab the value of error*/}
         const { error } = await supabase.auth.signInWithPassword(
             {
-                username: username,
+                email: email,
                 password: password,
                 options: {captchaToken},
             }
@@ -69,19 +69,15 @@ export default function Login() {
                 <input
                     disabled = {processing}
                     className = "inputs"
-                    type="text"
-                    minLength={1}
-                    maxlength={15}
-                    placeholder="enter username"
-                    value={username}
-                    onChange={(e) => setUsername(e.target.value)}
+                    type="email"
+                    placeholder="enter email"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
                 />
                 <input
                     disabled = {processing}
                     className = "inputs"
                     type="password"
-                    minLength={1}
-                    maxlength={25}
                     placeholder="enter password"
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}

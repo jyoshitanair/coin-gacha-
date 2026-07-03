@@ -50,7 +50,7 @@ export default function Newset(uuid) {
                 </div>
             )
         }
-        console.log(flashcards);
+        console.log()
         return terms;
     }
     return (

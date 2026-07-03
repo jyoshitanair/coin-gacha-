@@ -22,7 +22,6 @@ export default function Newset(uuid) {
                         minLength={1}
                         maxlength={50}
                         placeholder="enter term"
-                        value = {flashcards[i].term}
                         onChange={(e) => {
                             setFlashcards(prev => {
                                 const temp = [...prev];
@@ -38,10 +37,9 @@ export default function Newset(uuid) {
                         minLength={1}
                         maxlength={50}
                         placeholder="enter definition"
-                        value = {flashcards[i].definition}
                         onChange={(e) => {
                             setFlashcards(prev => {
-                                const temp = [...prev];
+                                const temp = {=[]...prev};
                                 temp[i] = {...temp[i], definition:e.target.value};
                                 return temp
                             })
@@ -50,7 +48,6 @@ export default function Newset(uuid) {
                 </div>
             )
         }
-        console.log(flashcards);
         return terms;
     }
     return (

@@ -71,7 +71,7 @@ export default function Login() {
                     className = "inputs"
                     type="text"
                     minLength={1}
-                    maxlength={15}
+                    maxlength={25}
                     placeholder="enter username"
                     value={username}
                     onChange={(e) => setUsername(e.target.value)}
@@ -80,8 +80,6 @@ export default function Login() {
                     disabled = {processing}
                     className = "inputs"
                     type="password"
-                    minLength={1}
-                    maxlength={25}
                     placeholder="enter password"
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
