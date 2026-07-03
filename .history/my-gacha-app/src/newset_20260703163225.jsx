@@ -38,7 +38,7 @@ export default function Newset({uuid}) {
                 }
                 else{
                     setProcessing(false)
-                    toast.success("Flashcards Created! Redirecting to your library...")
+                    toast.success("Flashcards Created! Redirecting to your p...")
                     setTimeout(() => {
                         setPage("library")
                         setProcessing(false)
@@ -134,7 +134,6 @@ export default function Newset({uuid}) {
                     }}> New Term</button>
                     <button disabled = {processing} type="submit"> Create!</button>
                 </form>
-                <button disabled = {processing} type="button" onClick = {() => {setPage("library")}}> Back to Library</button>
             </div>
         }
         {page == "library" && <Library uuid = {uuid}/>}

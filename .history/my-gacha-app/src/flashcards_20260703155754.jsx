@@ -45,7 +45,7 @@ export default function Flashcards({uuid}) {
             <h1 className = "maintext"> More Coins! </h1>
             <p className = "otherp"> Total Coins : {coins}</p>
             <button disabled = {loading} className = "accent_button" onClick={() => setPage("newset")}> New Set</button>
-            <button disabled = {loading} className = "accent_button" onClick={() => setPage("library")}> My Library</button>
+            <button disabled = {loading} className = "accent_button" onClick={() => setPage("library")}> Library</button>
             <button disabled = {loading} className = "buttons_normal" onClick={() => setPage("gamble")}> Gamble</button>
             <button disabled = {loading} className = "buttons_normal" onClick={() => setPage("dashboard")}> Dashboard</button>
         </div>}

@@ -114,14 +114,14 @@ export default function Practice({item}) {
                                 </div>
                             </>
                         }
-                    <button disabled = {(index == item.flashcardData.length - 1) || loading || !buttonText} onClick = {() => {updateCoinCount(true)}}> correct</button>
-                    <button disabled = {(index == item.flashcardData.length - 1) || loading || !buttonText} onClick = {() => {setIndex(prev => (Math.min(item.flashcardData.length-1,prev +1)))}}> wrong</button>
+                    <button disabled = {(index == item.flashcardData.length - 1) || loading || buttonText} onClick = {() => {updateCoinCount(true)}}> correct</button>
+                    <button disabled = {(index == item.flashcardData.length - 1) || loading || buttonText} onClick = {() => {setIndex(prev => (Math.min(item.flashcardData.length-1,prev +1)))}}> wrong</button>
                     <button onClick = {() => {setMode("learn")}}> Learn </button>
                 </div>}
             </div>
         </>
         }
-        {page == "library" && <Library uuid = {item.uuid}/>}
+        {page == "library" && <Library uuid = {uuid}/>}
         {page == "dashboard" && <Dashboard/>}
     </>
     );

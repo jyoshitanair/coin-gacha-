@@ -134,7 +134,7 @@ export default function Newset({uuid}) {
                     }}> New Term</button>
                     <button disabled = {processing} type="submit"> Create!</button>
                 </form>
-                <button disabled = {processing} type="button" onClick = {() => {setPage("library")}}> Back to Library</button>
+                <button disabled = {processing} type="button" onCLick = {setPage()}> Create!</button>
             </div>
         }
         {page == "library" && <Library uuid = {uuid}/>}

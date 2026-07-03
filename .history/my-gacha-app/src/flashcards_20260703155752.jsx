@@ -29,7 +29,7 @@ export default function Flashcards({uuid}) {
                 newCoinCount = data.coins;
             }
             const {error: error2} = await supabase.from("coin_data").upsert({uuid: uuid, coins: newCoinCount})
-            if (error2){
+            if (error){
                 toast.error(error.message);
                 setLoading(false);
                 return;
@@ -45,7 +45,7 @@ export default function Flashcards({uuid}) {
             <h1 className = "maintext"> More Coins! </h1>
             <p className = "otherp"> Total Coins : {coins}</p>
             <button disabled = {loading} className = "accent_button" onClick={() => setPage("newset")}> New Set</button>
-            <button disabled = {loading} className = "accent_button" onClick={() => setPage("library")}> My Library</button>
+            <button disabled = {loading} className = "accent_button" onClick={() => setPage("library")}> Library</button>
             <button disabled = {loading} className = "buttons_normal" onClick={() => setPage("gamble")}> Gamble</button>
             <button disabled = {loading} className = "buttons_normal" onClick={() => setPage("dashboard")}> Dashboard</button>
         </div>}
