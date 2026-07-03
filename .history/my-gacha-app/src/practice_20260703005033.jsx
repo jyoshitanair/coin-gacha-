@@ -111,6 +111,10 @@ export default function Library({item}) {
             </div>
         </>
         }
+        {fail == true && 
+        <>
+            <p className = "maintext"> Uh oh! </p>
+        </>}
     </>
     );
 }

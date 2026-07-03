@@ -18,26 +18,14 @@ export default function Library({item}) {
             updateCoinCount(false);
         }
         if (item == null) {
-            toast.error("no data detected. please go back to the library and try again!")
             setFail(true);
+            toast.error("no data detected. please go back to the library and try again!")
         }
     }, [item]);
-    if (fail == true) {
-        return(
-            <>
-            <Toaster/>
+    {fail == true && 
+        <>
             <p className = "maintext"> Uh oh! </p>
-            </>
-        )
-    }
-    if (item == null) {
-        return(
-            <>
-            <Toaster/>
-            <p className = "maintext"> Loading... </p>
-            </>
-        )
-    }
+    </>}
     async function updateCoinCount(tof) {
         setLoading(true)
         const {data, error} = await supabase.from("coin_data").select('coins').eq("uuid", item.user).maybeSingle() //return an object not array and null if nothing
@@ -58,8 +46,7 @@ export default function Library({item}) {
                     newCoinCount += 1;
                 }
             }
-            //becuz i hv two one need to be renamed
-            const {error: error2} = await supabase.from("coin_data").upsert({uuid: item.user, coins: newCoinCount})
+            const {error2} = await supabase.from("coin_data").upsert({uuid: item.user, coins: newCoinCount})
             if (error2){
                 toast.error(error2.message);
                 setLoading(false);
@@ -76,7 +63,6 @@ export default function Library({item}) {
         <>
         {fail == false &&
             <>
-                <Toaster/>
                 <div>
                     <div>
                         <h1> {item.title} by {item.user}</h1>
@@ -111,6 +97,10 @@ export default function Library({item}) {
             </div>
         </>
         }
+        {fail == true && 
+        <>
+            <p className = "maintext"> Uh oh! </p>
+        </>}
     </>
     );
 }

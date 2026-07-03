@@ -58,7 +58,6 @@ export default function Flashcards({uuid}) {
             <button disabled = {loading} className = "buttons_normal" onClick={() => setPage("newset")}> New Set</button>
             <button disabled = {loading} className = "buttons_normal" onClick={() => setPage("gamble")}> Gamble</button>
             <button disabled = {loading} className = "buttons_normal" onClick={() => setPage("dashboard")}> Dashboard</button>
-            <button disabled = {loading} className = "buttons_normal" onClick={() => setPage("library")}> Library</button>
         </div>}
         {page == "dashboard" && <Dashboard/>}
         {page == "gamble" && <Gamble uuid = {uuid}/>}

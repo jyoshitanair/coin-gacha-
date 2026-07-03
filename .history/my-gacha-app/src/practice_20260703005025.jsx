@@ -58,7 +58,6 @@ export default function Library({item}) {
                     newCoinCount += 1;
                 }
             }
-            //becuz i hv two one need to be renamed
             const {error: error2} = await supabase.from("coin_data").upsert({uuid: item.user, coins: newCoinCount})
             if (error2){
                 toast.error(error2.message);
@@ -111,6 +110,10 @@ export default function Library({item}) {
             </div>
         </>
         }
+        {fail == true && 
+        <>
+            <p className = "maintext"> Uh oh! </p>
+        </>}
     </>
     );
 }
