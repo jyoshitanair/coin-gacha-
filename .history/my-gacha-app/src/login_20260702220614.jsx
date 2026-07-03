@@ -39,7 +39,7 @@ export default function Login() {
         only grab the value of error*/}
         const { error } = await supabase.auth.signInWithPassword(
             {
-                email: `${username}@default.com`,
+                username: username,
                 password: password,
                 options: {captchaToken},
             }

@@ -1,29 +1,23 @@
-import React from 'react';
+import react from 'react';
 import { useState } from 'react';
+import Login from './login.jsx'
 import toast, {Toaster} from 'react-hot-toast'
 //supabase
 import { createClient } from '@supabase/supabase-js'
 const supabaseUrl = import.meta.env.VITE_SUPABASE_URL
 const supabaseKey = import.meta.env.VITE_SUPABASE_PUBLISHABLE_KEY
 const supabase = createClient(supabaseUrl, supabaseKey)
-
 import { Turnstile } from '@marsidev/react-turnstile'
-import Dashboard from './dashboard.jsx'
-import Signup from './signup.jsx'
 
-//export allows it to be imported in other files
-//default means that it is the main (can only hv one) thingy of the file so no curly braces !
-
-export default function Login() {
+export default function Signup() {
     const [captchaToken, setCaptchaToken] = useState()
+    const [page, setPage] = useState("signup");
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
-    const [page, setPage] = useState("login");
     const[processing, setProcessing] = useState(false);
 
-    async function handleLogin(e) {
+    async function handleSignup(e){
         setProcessing(true)
-        //e only for forms :3
         e.preventDefault();
         if (!username || !password){
             toast.error("Missing Fields");
@@ -35,56 +29,58 @@ export default function Login() {
             setProcessing(false)
             return;
         }
-        {/* this makes it so that the form doesnt refresh and lose all data
-        only grab the value of error*/}
-        const { error } = await supabase.auth.signInWithPassword(
+        const {error} = await supabase.auth.signUp(
             {
-                email: `${username}@default.com`,
+                email: {`${username}@default.com`},
                 password: password,
-                options: {captchaToken},
+                options: {captchaToken}
             }
         )
-        if (error) {
-            toast.error(error.message)
+        if (error){
+            if (error.message == "Password should be at least 6 characters. Password should contain at least one character of each: abcdefghijklmnopqrstuvwxyz, ABCDEFGHIJKLMNOPQRSTUVWXYZ, 0123456789, !@#$%^&*()_+-=[]{};':\"|<>?,./`~."){
+                toast.error("You need: 6+ characters, 1+ lowercase, 1+ uppercase, 1+ number, and 1+ special character.");
+            
+            }else{
+                toast.error(error.message);
+            }
             setCaptchaToken(null);
             setProcessing(false)
-        } else {
-            toast.success("Welcome back!")
+        }else{
+            toast.success("Account Created! Redirecting to login page...")
             setTimeout(() => {
-                setPage("dashboard")
+                setPage("login")
                 setProcessing(false)
             },1500)
         }
     }
-    return (
+
+
+    return(
         <>
-            {page == "login" && 
-            <div  className = "center" >
+            {page == "signup" && 
+            <div className = "center">
             <Toaster className = "toaster"/>
-            <h1 className = "maintext" > login page</h1>
-            <form onSubmit={handleLogin} className = "form">
-                {/* different types are text,email,number,checkbox,password*/}
-                {/*so target is where it happened (in the input box) and value is its value
-                no comments inside tags!*/}
+            <h1 className = "maintext">Sign Up</h1>
+            <form className = "form" onSubmit = {handleSignup}>
                 <input
-                    disabled = {processing}
-                    className = "inputs"
-                    type="text"
-                    minLength={1}
-                    maxlength={15}
-                    placeholder="enter username"
-                    value={username}
-                    onChange={(e) => setUsername(e.target.value)}
+                disabled = {processing}
+                className = "inputs"
+                type = "text"
+                minLength={1}
+                maxlength={15}
+                placeholder = "enter username"
+                value = {username}
+                onChange = {(e) => setUsername(e.target.value)}
                 />
                 <input
-                    disabled = {processing}
-                    className = "inputs"
-                    type="password"
-                    minLength={1}
-                    maxlength={25}
-                    placeholder="enter password"
-                    value={password}
-                    onChange={(e) => setPassword(e.target.value)}
+                disabled = {processing}
+                className = "inputs"
+                type = "password"
+                minLength={1}
+                maxlength={25}
+                placeholder = "enter password"
+                value = {password}
+                onChange = {(e) => setPassword(e.target.value)}
                 />
                 {captchaToken != null && 
                 <>
@@ -112,14 +108,15 @@ export default function Login() {
                         }}
                     />
                 </>}
-                <button disabled = {processing} className = "buttons_normal" type="submit" >Let's go!</button>
+                <button disabled = {processing} className = "buttons_normal" type = "submit"> Sign up </button>
+
             </form>
-            <button disabled = {processing} className = "accent_button"  type = "button" onClick ={() => setPage("signup")}>Sign up?</button>
+            <button disabled = {processing} className = "accent_button" type = "button" onClick = {( ) => setPage("login")}> Login </button>
             </div>
             }
-            {page == "signup" && <Signup />}
-            {page == "dashboard" && <Dashboard/>}
-        </>
-        
+            
+            {page == "login" && <Login/>}
+
+    </>
     );
 }
