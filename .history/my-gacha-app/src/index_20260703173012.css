@@ -403,43 +403,10 @@ code {
   margin-top: -100px;
   padding-top: 80px;
 }
-.mediump_normal{
-  margin-top: 25px;
-  text-align: left;
-  margin-left:50px;
-  font-family:serif;
-  font-weight: bolder;
-  font-size:large;
-}
-.otherp_normal{
-  font-family:serif;
-  font-weight: bolder;
-  font-size:30px;
-}
 .singleFlashcard{
-  margin-top: 70px;
-  margin-bottom: 70px;
-  margin-left: auto;
-  margin-right: auto;
   width: 500px;
   height: 300px; 
-  background-color:#e3a7e2;
+  background-color:#5bdec6;
   border:#2e022d 3px solid;
-  border-radius: 30px;
-}
-.title_details{
-  font-family:cursive;
-  border-color:#b81aae;
-  background-color: #cb61d0;
-  padding: 40px;
-  border-radius: 60px;
-  border-width: 5px;
-  border-style: solid;
-  gap: 15px;
-  flex-direction: column;
-  display: flex;
-  justify-content:center;
-  align-items: flex-start; 
-  font-size:medium;
-  width: 50vw
+border-radius: 30px;
 }

@@ -104,8 +104,7 @@ export default function Newset({uuid}) {
                 <Toaster/>
                 <h1 className = "maintext"> New Set:</h1>
                 <form onSubmit={logFlashcards}>
-                    <div className = "title_details">
-                        <h4 className = "otherp_normal"> Creation Details </h4>
+                    <div className = "maintext">
                         <input
                         className = "inputs"
                         required
@@ -129,6 +128,7 @@ export default function Newset({uuid}) {
                             onChange={(e) => setDescription(e.target.value)}
                         />
                     </div>
+                    <h4 className = "otherp"> Terms</h4>
                     <div key = {flashcards.length}>
                         {
                             reRenderCards()

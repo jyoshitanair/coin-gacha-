@@ -105,7 +105,6 @@ export default function Newset({uuid}) {
                 <h1 className = "maintext"> New Set:</h1>
                 <form onSubmit={logFlashcards}>
                     <div className = "title_details">
-                        <h4 className = "otherp_normal"> Creation Details </h4>
                         <input
                         className = "inputs"
                         required
@@ -129,6 +128,7 @@ export default function Newset({uuid}) {
                             onChange={(e) => setDescription(e.target.value)}
                         />
                     </div>
+                    <h4 className = "otherp_normal"> Creation Details </h4>
                     <div key = {flashcards.length}>
                         {
                             reRenderCards()

@@ -411,11 +411,6 @@ code {
   font-weight: bolder;
   font-size:large;
 }
-.otherp_normal{
-  font-family:serif;
-  font-weight: bolder;
-  font-size:30px;
-}
 .singleFlashcard{
   margin-top: 70px;
   margin-bottom: 70px;
@@ -436,7 +431,7 @@ code {
   border-width: 5px;
   border-style: solid;
   gap: 15px;
-  flex-direction: column;
+  flex-direction: row;
   display: flex;
   justify-content:center;
   align-items: flex-start; 

@@ -411,11 +411,6 @@ code {
   font-weight: bolder;
   font-size:large;
 }
-.otherp_normal{
-  font-family:serif;
-  font-weight: bolder;
-  font-size:30px;
-}
 .singleFlashcard{
   margin-top: 70px;
   margin-bottom: 70px;
@@ -428,18 +423,5 @@ code {
   border-radius: 30px;
 }
 .title_details{
-  font-family:cursive;
-  border-color:#b81aae;
-  background-color: #cb61d0;
-  padding: 40px;
-  border-radius: 60px;
-  border-width: 5px;
-  border-style: solid;
-  gap: 15px;
-  flex-direction: column;
-  display: flex;
-  justify-content:center;
-  align-items: flex-start; 
-  font-size:medium;
-  width: 50vw
+  
 }

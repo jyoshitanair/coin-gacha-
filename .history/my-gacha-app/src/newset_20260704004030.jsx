@@ -57,7 +57,6 @@ export default function Newset({uuid}) {
                     <h5> Flashcard # {i+1}</h5>
                     <p className = "mediump_normal"> Term:</p>
                     <input
-                        className = "inputs"
                         required
                         disabled={processing}
                         type="text"
@@ -104,9 +103,7 @@ export default function Newset({uuid}) {
                 <Toaster/>
                 <h1 className = "maintext"> New Set:</h1>
                 <form onSubmit={logFlashcards}>
-                    <div className = "title_details">
-                        <h4 className = "otherp_normal"> Creation Details </h4>
-                        <input
+                    <input
                         className = "inputs"
                         required
                         disabled={processing}
@@ -116,19 +113,19 @@ export default function Newset({uuid}) {
                         placeholder="enter title"
                         value={title}
                         onChange={(e) => setTitle(e.target.value)}
-                        />
-                        <input
-                            className = "inputs"
-                            required
-                            disabled={processing}
-                            type="text"
-                            minLength={1}
-                            maxLength={50}
-                            placeholder="enter description"
-                            value={description}
-                            onChange={(e) => setDescription(e.target.value)}
-                        />
-                    </div>
+                    />
+                    <input
+                        className = "inputs"
+                        required
+                        disabled={processing}
+                        type="text"
+                        minLength={1}
+                        maxLength={50}
+                        placeholder="enter description"
+                        value={description}
+                        onChange={(e) => setDescription(e.target.value)}
+                    />
+                    <h4 className = "otherp"> Terms</h4>
                     <div key = {flashcards.length}>
                         {
                             reRenderCards()
