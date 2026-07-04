@@ -99,12 +99,11 @@ export default function Newset({uuid}) {
     return (
         <>
         {page == "newset" &&
-            <div className = "center">
+            <div>
                 <Toaster/>
-                <h1 className = "maintext"> New Set:</h1>
-                <form onSubmit={logFlashcards}>
+                <form className = "form"onSubmit={logFlashcards}>
+                    <h1> New Set:</h1>
                     <input
-                        className = "inputs"
                         required
                         disabled={processing}
                         type="text"
@@ -115,7 +114,6 @@ export default function Newset({uuid}) {
                         onChange={(e) => setTitle(e.target.value)}
                     />
                     <input
-                        className = "inputs"
                         required
                         disabled={processing}
                         type="text"
@@ -125,7 +123,7 @@ export default function Newset({uuid}) {
                         value={description}
                         onChange={(e) => setDescription(e.target.value)}
                     />
-                    <h4 className = "otherp"> Terms</h4>
+                    <h4> Terms</h4>
                     <div key = {flashcards.length}>
                         {
                             reRenderCards()

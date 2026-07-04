@@ -23,7 +23,7 @@ export default function Dashboard() {
             const {data: {user}} = await supabase.auth.getUser()
             if (user) {
                 setUuid(user.id)
-                setEmail(user.email.replace("@default.com", ""))
+                setEmail(user.email)
                 setProcessing(false);
             }else{
                 toast.error("User not signed in.")
@@ -58,7 +58,7 @@ export default function Dashboard() {
             <h1 className = "maintext"> welcome to the app</h1>
             <div id = "information">
                 <h1 className = "smallh1"> Your Information: </h1>
-                <p style = {{paddingLeft: '40px'}}>Username: {email}</p>
+                <p style = {{paddingLeft: '40px'}}>Email: {email}</p>
                 <p style = {{paddingLeft: '40px'}}>UUID: {uuid} </p>
             </div>
             <button className = "buttons_normal" disabled = {processing} onClick={() => setPage("gamble")}> Gamble</button>

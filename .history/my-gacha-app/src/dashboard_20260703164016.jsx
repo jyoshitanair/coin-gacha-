@@ -23,7 +23,7 @@ export default function Dashboard() {
             const {data: {user}} = await supabase.auth.getUser()
             if (user) {
                 setUuid(user.id)
-                setEmail(user.email.replace("@default.com", ""))
+                setEmail(user.email)
                 setProcessing(false);
             }else{
                 toast.error("User not signed in.")

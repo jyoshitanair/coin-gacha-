@@ -87,7 +87,7 @@ export default function Library({uuid}) {
             {page == "library" && loading == false &&
                 <div className = "center">
                     <Toaster/>
-                    <h1 className = "maintext" > Your Flashcards</h1>
+                    <h1 className = "maintext" > Your Flashc</h1>
                     <button 
                     disabled = {processing}
                     className = "buttons_normal" 

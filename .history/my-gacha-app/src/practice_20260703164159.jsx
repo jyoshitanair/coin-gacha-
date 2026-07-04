@@ -89,9 +89,9 @@ export default function Practice({item}) {
                 <Toaster/>
                 <div>
                     <div>
+                        <
                         <h1> {item.title} by {item.user}</h1>
                         <h3> {item.description}</h3>
-                        <h3> Your coins: {coins}</h3>
                     </div>
                 <button onClick = {() => {setPage("dashboard")}}> Dashboard </button>
                 <button onClick = {() => {setPage("library")}}> Library </button>
