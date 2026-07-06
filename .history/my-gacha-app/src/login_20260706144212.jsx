@@ -64,7 +64,7 @@ export default function Login() {
             <Toaster className = "toaster"/>
             <div className = "patcher" style = {{height: '80vh', marginBottom: '-210px'}}>
                 <h1 className = "maintext" > login page</h1>
-                <img className = "patch" src = {sparklecat}/>
+                <img className = "patchotherway" src = {sparklecat}/>
             </div>
             <form onSubmit={handleLogin} className = "form">
                 {/* different types are text,email,number,checkbox,password*/}

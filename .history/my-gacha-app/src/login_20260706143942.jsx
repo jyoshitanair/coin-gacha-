@@ -118,9 +118,8 @@ export default function Login() {
                 </>}
                 <button disabled = {processing} className = "buttons_normal" type="submit" >Let's go!</button>
             </form>
-            <button disabled = {processing} className = "accent_button"  type = "button" onClick ={() => setPage("signup")}>Sign up?</button>
-            <div style = {{paddingBottom: '40px'}}>
-            </div></div>
+            <button disabled = {processing} className = "accent_button bottom"  type = "button" onClick ={() => setPage("signup")}>Sign up?</button>
+            </div>
             }
             {page == "signup" && <Signup />}
             {page == "dashboard" && <Dashboard/>}

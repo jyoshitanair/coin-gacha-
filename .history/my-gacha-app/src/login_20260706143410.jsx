@@ -62,7 +62,7 @@ export default function Login() {
             {page == "login" && 
             <div  className = "center" >
             <Toaster className = "toaster"/>
-            <div className = "patcher" style = {{height: '80vh', marginBottom: '-210px'}}>
+            <div className = "patcher" style = {{height: 30vh !importnat}}>
                 <h1 className = "maintext" > login page</h1>
                 <img className = "patch" src = {sparklecat}/>
             </div>
@@ -119,8 +119,7 @@ export default function Login() {
                 <button disabled = {processing} className = "buttons_normal" type="submit" >Let's go!</button>
             </form>
             <button disabled = {processing} className = "accent_button"  type = "button" onClick ={() => setPage("signup")}>Sign up?</button>
-            <div style = {{paddingBottom: '40px'}}>
-            </div></div>
+            </div>
             }
             {page == "signup" && <Signup />}
             {page == "dashboard" && <Dashboard/>}
