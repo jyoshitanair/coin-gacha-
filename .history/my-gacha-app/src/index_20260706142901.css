@@ -1,0 +1,519 @@
+:root {
+  --text: #6b6375;
+  --text-h: #08060d;
+  --bg: #c084fc;
+  --border: #e5e4e7;
+  --code-bg: #f4f3ec;
+  --accent: #aa3bff;
+  --accent-bg: rgba(170, 59, 255, 0.1);
+  --accent-border: rgba(170, 59, 255, 0.5);
+  --social-bg: rgba(244, 243, 236, 0.5);
+  --shadow:
+    rgba(0, 0, 0, 0.1) 0 10px 15px -3px, rgba(0, 0, 0, 0.05) 0 4px 6px -2px;
+
+  --sans: system-ui, 'Segoe UI', Roboto, sans-serif;
+  --heading: system-ui, 'Segoe UI', Roboto, sans-serif;
+  --mono: ui-monospace, Consolas, monospace;
+
+  font: 18px/145% var(--sans);
+  letter-spacing: 0.18px;
+  color-scheme: light dark;
+  color: var(--text);
+  background: var(--bg);
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+
+  @media (max-width: 1024px) {
+    font-size: 16px;
+    #root{
+      width: 100%;
+      height: 100%;
+      border-inline:none;
+    }
+  }
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --text: #9ca3af;
+    --text-h: #f3f4f6;
+    --bg: #16171d;
+    --border: #2e303a;
+    --code-bg: #1f2028;
+    --accent: #c084fc;
+    --accent-bg: rgba(192, 132, 252, 0.15);
+    --accent-border: rgba(192, 132, 252, 0.5);
+    --social-bg: rgba(47, 48, 58, 0.5);
+    --shadow:
+      rgba(0, 0, 0, 0.4) 0 10px 15px -3px, rgba(0, 0, 0, 0.25) 0 4px 6px -2px;
+  }
+
+  #social .button-icon {
+    filter: invert(1) brightness(2);
+  }
+}
+
+body {
+  background-color: #c084fc;
+  margin: 0;
+  scrollbar-width: none;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+#root {
+  width: 100%;
+  max-width: 100%;
+  margin: 0 auto;
+  text-align: center;
+  border-inline: 1px solid var(--border);
+  min-height: 100svh;
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+}
+
+h1,
+h2 {
+  font-family: var(--heading);
+  font-weight: 500;
+  color: var(--text-h);
+}
+
+h1 {
+  font-size: 56px;
+  letter-spacing: -1.68px;
+  margin: 32px 0;
+  @media (max-width: 1024px) {
+    font-size: 36px;
+    margin: 20px 0;
+  }
+}
+h2 {
+  font-size: 24px;
+  line-height: 118%;
+  letter-spacing: -0.24px;
+  margin: 0 0 8px;
+  @media (max-width: 1024px) {
+    font-size: 20px;
+  }
+}
+p {
+  margin: 0;
+}
+
+code,
+.counter {
+  font-family: var(--mono);
+  display: inline-flex;
+  border-radius: 4px;
+  color: var(--text-h);
+}
+
+code {
+  font-size: 15px;
+  line-height: 135%;
+  padding: 4px 8px;
+  background: var(--code-bg);
+}
+
+/* stuff i added lol */
+@font-face{
+  font-family: cat-font;
+  src: url("assets/Cat_font-Regular.ttf") format("truetype");/*can not use .ttf!*/
+}
+.maintext{
+  font-family:cat-font !important;
+  font-size: 140px;
+  color:#4e0c81;
+  width: 70vw;
+  line-height: 150px;
+}
+.buttons_normal:disabled,.accent_button:disabled,.buttons_small:disabled{
+  background-color: #948f94 !important;
+  color: #000000 !important;
+  border-color: #000000 !important;
+  transform: scale(1) !important;
+}
+.buttons_normal{
+  margin: 0px auto;
+  font-weight: bold;
+  color: #02362d;
+  cursor: pointer;
+  user-select:none;
+  border-radius: 40px;
+  padding: 10px 30px ;
+  width: fit-content;
+  background-color: #5bdec6;
+  font-size: 15px;
+  font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+  border: 2.3px  solid #02362d;
+}
+.accent_button{
+  anchor-name: --button-anchor;
+  margin: 0px auto;
+  font-weight: bold;
+  font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+  cursor: pointer;
+  user-select:none;
+  font-size: 15px;
+  border-radius: 40px;
+  padding: 10px 30px ;
+  width: fit-content;
+  color: #2e022d;
+  background-color: #d142cf;
+  border: 2.3px  solid #2e022d;
+}
+.buttons{
+  margin: 0px auto;
+  font-weight: bold;
+  color: #02362d;
+  cursor: pointer;
+  user-select:none;
+  border-radius: 40px;
+  padding: 30px ;
+  width: fit-content;
+  background-color: #5bdec6;
+  font-size: 25px;
+  font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+  border: 3.3px  solid #02362d;
+}
+.buttons:hover,.buttons_normal:hover, .buttons_small:hover{
+  transform: scale(1.1);
+  background-color: #c1ece4;
+}
+.accent_button:hover{
+  transform: scale(1.1);
+  background-color: #eba0ea;
+}
+.accent_button:active{
+  transform: scale(0.9);
+  background-color: #cc06c9;
+}
+.buttons:active,.buttons_normal:active,.buttons_small:active{
+  transform: scale(0.9);
+  background-color: #14e4be;
+}
+.center{
+  font-family:Verdana, Geneva, Tahoma, sans-serif;
+  font-size: 23px;
+  color: rgb(74, 5, 79);
+  justify-content:flex-start;
+  display:flex;
+  align-items: center;
+  flex-direction: column;
+}
+.special_button{
+  margin: -10px 250px !important;
+  margin-right: auto !important; 
+}
+#buttonSpacer{
+  display:flex;
+  align-items: center;
+  flex-direction: row;
+  column-gap: 200px;
+}
+
+
+#fattest_div{
+  right: -20px;
+  bottom: 330px;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+#p_combined{
+  position:absolute;
+  position-anchor: --anchor;
+  top: calc(anchor(center) - 150px);
+  left: calc(anchor(left) + 80px);
+}
+#p_combined p{
+  font-size: 15px;
+  font-weight: bold;
+}
+#imgContainer,#imgContainerdup{
+  anchor-name: --anchor;
+  position: absolute;
+  top:0; 
+  left:0; 
+  overflow:hidden;
+  width: 450px;
+  height: 450px;
+}
+#imgContainerdup img{
+  /* so that they do not stack ontop of each other. absolute elements are invisible*/
+  position: absolute;
+  top: 0; 
+  left:0; 
+  /* lol not rlly necessary because everything is the same size but okay */
+  object-fit:contain;
+  width: 450px;
+  height: 450px;
+}
+#imgContainer img{
+  /* so that they do not stack ontop of each other. absolute elements are invisible*/
+  position: absolute;
+  top: 0; 
+  left:0; 
+  /* lol not rlly necessary because everything is the same size but okay */
+  object-fit: contain;
+  width: 100%;
+  height: 100%;
+}
+.body_img{
+  z-index: 1;
+}
+.accessories_img{
+  z-index: 2;
+}
+.head_img{
+  z-index: 3;
+}
+.mouths_img{
+  z-index: 4;
+}
+.hair_img{
+  z-index: 5;
+}
+.eyes_img{
+  z-index: 6;
+}
+.small_img{
+  margin-top: -40px;
+  width: 150px;
+  height: 150px;
+}
+
+.form{
+  gap: 10px;
+  justify-content:space-around;
+  display:flex;
+  align-items: center;
+  flex-direction: column;
+  margin: auto auto;
+  width: 320px;
+  height: 250px;
+  overflow:hidden;
+}
+.inputs{
+  font-family:cursive;
+  font-size: 13px;
+  opacity: 1;
+  color: rgb(36, 1, 42);
+  background-color: #d38bed;
+  width: 290px;
+}
+.inputs::placeholder{
+  color: rgb(170, 13, 198);
+}
+.inputs:focus{
+  outline:3px solid #911d93;
+  color: rgb(36, 1, 42);
+  font-weight: bold;
+}
+.turnstile{
+  border-radius:65px;
+  border-width: 3.3px;
+  border-color:#50055a;
+  border-style: solid;
+  height: 60px;
+  overflow: hidden; 
+}
+#information{
+  font-family:cursive;
+  border-color:#1d045c;
+  background-color: #66aaee;
+  padding: 40px;
+  border-radius: 60px;
+  border-width: 5px;
+  border-style: solid;
+  gap: 15px;
+  flex-direction: column;
+  display: flex;
+  justify-content:center;
+  align-items: flex-start; 
+  font-size:medium;
+  width: 70vw
+}
+.smallh1{
+  font-family:serif;
+  font-weight: bolder;
+  font-size:xx-large;
+}
+.grid_container{
+  anchor-name: --anchor1;
+  display:grid;
+  grid-template-columns: repeat(3, 200px); /* repeat 1 fraction 3 times!*/
+  grid-template-rows: repeat(3, 200px);
+  height: 740px;
+  width: 740px;
+  gap: 60px;
+  padding: 50px 20px;
+  z-index: 10;
+  position: relative;
+}
+.grid_item{
+  padding: 10px 5px;
+  z-index: 11;
+}
+.smallp{
+  font-family:serif;
+  font-weight: bolder;
+  font-size:small;
+}
+.shelf{
+  z-index: 9;
+  position:absolute;
+  top:0;
+  left:0; 
+  bottom:0;
+  right:0; 
+  width:100%;
+  height: 100%;
+  object-fit:cover;
+}
+.gumballimg{
+  width:250px;
+  height:auto;
+  position-anchor: --button-anchor;
+  position:absolute;
+  top: calc(anchor(center) - 270px);
+  left: calc(anchor(left) - 260px);
+}
+.otherp{
+  font-family:serif;
+  font-weight: bolder;
+  font-size:larger;
+  margin-top: -100px;
+  padding-bottom: 40px;
+  padding-top: 20px;
+}
+.mediump{
+  font-family:serif;
+  font-weight: bolder;
+  font-size:large;
+  margin-top: -100px;
+  padding-top: 80px;
+}
+.mediump_normal{
+  margin-top: 25px;
+  text-align: left;
+  margin-left:50px;
+  font-family:serif;
+  font-weight: bolder;
+  font-size:large;
+}
+.otherp_normal{
+  font-family:serif;
+  font-weight: bolder;
+  font-size:30px;
+}
+.singleFlashcard{
+  margin-top: 70px;
+  margin-bottom: 70px;
+  margin-left: auto;
+  margin-right: auto;
+  width: 500px;
+  height: 300px; 
+  background-color:#e3a7e2;
+  border:#2e022d 3px solid;
+  border-radius: 30px;
+}
+.title_details{
+  font-family:cursive;
+  border-color:#b81aae;
+  background-color: #cb61d0;
+  padding: 40px;
+  border-radius: 60px;
+  border-width: 5px;
+  border-style: solid;
+  gap: 15px;
+  flex-direction: column;
+  display: flex;
+  justify-content:center;
+  align-items: flex-start; 
+  font-size:medium;
+  width: 50vw
+}
+.grid_item2{
+  padding: 15px;
+  z-index: 11;
+  background-color: #b0dfd7;
+  border-radius: 50px;
+  display: inline-block;
+}
+.buttons_small{
+  margin: 30px auto;
+  font-weight: bold;
+  color: #02362d;
+  cursor: pointer;
+  user-select:none;
+  border-radius: 80px;
+  padding: 10px;
+  width: fit-content;
+  background-color: #5bdec6;
+  font-size: 13px;
+  font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+  border: 2.3px  solid #02362d;
+}
+.crop{
+  /* stay on one line */
+  white-space: nowrap !important; 
+  overflow: hidden !important;
+  /* adds dots! thats cool >,<*/
+  text-overflow: ellipsis !important;
+  line-height: 1.4 !important;
+}
+
+.flashcardito{
+  margin: 60px;
+  padding: 130px 200px;
+  z-index: 11;
+  background-color: #f0d0e0;
+  border-radius: 50px;
+  font-size:23px;
+  display: inline-block;
+}
+.bottom{
+  padding-bottom: 20vh;
+}
+.patch{
+  width: 350px;
+  height: 500px;
+  margin-top: -400px;
+  z-index: 1 !important;
+  opacity: 0.7;
+  align-self: flex-start;
+}
+.patcher{
+  flex-direction: column;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 80px;
+  margin-top: 40px;
+  width: 100vw;
+  height: 100vh;
+  
+}
+.patchotherway{
+  width: 350px;
+  height: 500px;
+  margin-top: -450px;
+  z-index: 1 !important;
+  opacity: 0.7;
+  align-self: flex-end;
+}
+.patcher p{
+  z-index: 2;
+  text-shadow:-4px 2px 3px  #d9afec
+  /* stroke, then fill! ay that sounds sus im sorry*/
+}
+.snap{
+  overflow-y: scroll;
+  scroll-snap-type: y mandatory;
+}
