@@ -20,7 +20,6 @@ export default function Practice({item}) {
     const [right, setRight] = useState(0);
     const [wrong, setWrong] = useState(0);
     const [username, setUSername] = useState(null);
-    const [coinsChanged, setCoinsChanged] = useState(0);
     useEffect(() => {
         setIndex(0);
     }, [mode]);
@@ -78,15 +77,10 @@ export default function Practice({item}) {
                     newCoinCount = data.coins;
                 }else if(tof == 2){
                     newCoinCount =data.coins+ 1;
-                    setCoinsChanged(prev => prev + 1)
                 }else if (tof == 3){
                     newCoinCount = Math.max(0, (data.coins- 1));
-                    if (newCoinCount < data.coins){
-                        setCoinsChanged(prev => prev - 1)
-                    }
                 }else if (tof ==4){
-                    newCoinCount = Math.max(0, data.coins - coinsChanged);
-                    setCoinsChanged(0)
+                    newCoinCount = Math.max(0, data.coins - right + wrong);
                 }
             }else{
                 //user is null insert new row
@@ -146,8 +140,8 @@ export default function Practice({item}) {
                         <h3 className = "mediump"> Mode: <strong> <em> {mode} </em> </strong></h3>
                     </div>
                 <div style = {{paddingLeft: '400px', paddingRight: '400px'}} className = "buttonSpacer">
-                    <button disabled = {loading} className = "buttons_normal" onClick = {() => {setPage("dashboard")}}> Dashboard </button>
-                    <button disabled = {loading} className = "buttons_normal" onClick = {() => {setPage("library")}}> Library </button>
+                    <button className = "buttons_normal" onClick = {() => {setPage("dashboard")}}> Dashboard </button>
+                    <button className = "buttons_normal" onClick = {() => {setPage("library")}}> Library </button>
                 </div>
                 {mode == "learn" && <div> 
                     {item.flashcardData &&
@@ -167,7 +161,7 @@ export default function Practice({item}) {
                             <>
                                 <div>
                                     <p> #{index + 1}</p>
-                                    <button className = "flashcardito" onClick = {() => {setButtonText(prev => !prev)}}>{buttonText? `Q: ${item.flashcardData[index].term}`: `A: ${item.flashcardData[index].definition}` }</button>
+                                    <button className = "flashcardito" onClick = {() => {setButtonText(prev => !prev)}}>{buttonText? `Q: ${item.flashcardData[index].term}`: `Definition: ${item.flashcardData[index].definition}` }</button>
                                 </div>
                             </>
                         }
@@ -188,7 +182,7 @@ export default function Practice({item}) {
         }
         {page == "library" && <Library uuid = {item.user}/>}
         {page == "dashboard" && <Dashboard/>}
-        {page == "done" && <Done uuid = {item.user} right = {right} wrong = {wrong} item = {item} coinsChanged = {coinsChanged} />}
+        {page == "done" && <Done uuid = {item.user} right = {right} wrong = {wrong} item = {item} />}
     </>
     );
 }

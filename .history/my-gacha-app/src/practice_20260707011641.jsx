@@ -20,7 +20,6 @@ export default function Practice({item}) {
     const [right, setRight] = useState(0);
     const [wrong, setWrong] = useState(0);
     const [username, setUSername] = useState(null);
-    const [coinsChanged, setCoinsChanged] = useState(0);
     useEffect(() => {
         setIndex(0);
     }, [mode]);
@@ -28,7 +27,8 @@ export default function Practice({item}) {
         setButtonText(true);
     }, [index, mode]);
     useEffect(() => {
-        if (item != null){
+        let on = true
+        if (item != null && on){
             updateCoinCount(1);
             getusername()
         }
@@ -78,15 +78,10 @@ export default function Practice({item}) {
                     newCoinCount = data.coins;
                 }else if(tof == 2){
                     newCoinCount =data.coins+ 1;
-                    setCoinsChanged(prev => prev + 1)
                 }else if (tof == 3){
                     newCoinCount = Math.max(0, (data.coins- 1));
-                    if (newCoinCount < data.coins){
-                        setCoinsChanged(prev => prev - 1)
-                    }
                 }else if (tof ==4){
-                    newCoinCount = Math.max(0, data.coins - coinsChanged);
-                    setCoinsChanged(0)
+                    newCoinCount = Math.max(0, (data.coins - (right + wrong)))
                 }
             }else{
                 //user is null insert new row
@@ -146,8 +141,8 @@ export default function Practice({item}) {
                         <h3 className = "mediump"> Mode: <strong> <em> {mode} </em> </strong></h3>
                     </div>
                 <div style = {{paddingLeft: '400px', paddingRight: '400px'}} className = "buttonSpacer">
-                    <button disabled = {loading} className = "buttons_normal" onClick = {() => {setPage("dashboard")}}> Dashboard </button>
-                    <button disabled = {loading} className = "buttons_normal" onClick = {() => {setPage("library")}}> Library </button>
+                    <button className = "buttons_normal" onClick = {() => {setPage("dashboard")}}> Dashboard </button>
+                    <button className = "buttons_normal" onClick = {() => {setPage("library")}}> Library </button>
                 </div>
                 {mode == "learn" && <div> 
                     {item.flashcardData &&
@@ -160,20 +155,20 @@ export default function Practice({item}) {
                     }
                     <button className = "buttons_normal" disabled = {(index == item.flashcardData.length - 1) || loading} onClick = {() => {setIndex(prev => (Math.min(item.flashcardData.length-1,prev +1)))}}> Next</button>
                     <button className = "buttons_normal" disabled = {(index == 0) || loading} onClick = {() => {setIndex(prev => (Math.max(0,prev -1)))}}> Previous</button>
-                    <button disabled = {loading} className = "accent_button" onClick = {() => {setMode("test")}}> Test </button>
+                    <button className = "accent_button" onClick = {() => {setMode("test")}}> Test </button>
                 </div>}
                 {mode == "test" && <div>
                     {item.flashcardData &&
                             <>
                                 <div>
                                     <p> #{index + 1}</p>
-                                    <button className = "flashcardito" onClick = {() => {setButtonText(prev => !prev)}}>{buttonText? `Q: ${item.flashcardData[index].term}`: `A: ${item.flashcardData[index].definition}` }</button>
+                                    <button className = "flashcardito" onClick = {() => {setButtonText(prev => !prev)}}>{buttonText? `Term: ${item.flashcardData[index].term}`: `Definition: ${item.flashcardData[index].definition}` }</button>
                                 </div>
                             </>
                         }
                     <button className = "buttons_normal" disabled = {loading || buttonText} onClick = {() => {updateCoinCount(2)}}> correct</button>
                     <button className = "buttons_normal" disabled = {loading || buttonText} onClick = {() => {updateCoinCount(3)}}> wrong</button>
-                    <button disabled = {loading} className = "accent_button" onClick = {() => {
+                    <button className = "accent_button" onClick = {() => {
                         setLoading(true)
                         const yon = window.confirm("are you sure? This is reset all your coin progress so far...")
                         if(yon){
@@ -188,7 +183,7 @@ export default function Practice({item}) {
         }
         {page == "library" && <Library uuid = {item.user}/>}
         {page == "dashboard" && <Dashboard/>}
-        {page == "done" && <Done uuid = {item.user} right = {right} wrong = {wrong} item = {item} coinsChanged = {coinsChanged} />}
+        {page == "done" && <Done uuid = {item.user} right = {right} wrong = {wrong} item = {item} />}
     </>
     );
 }

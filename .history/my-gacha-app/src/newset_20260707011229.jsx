@@ -37,7 +37,7 @@ export default function Newset({uuid}) {
                     return;
                 }
                 else{
-                    setProcessing(true)
+                    setProcessing(false)
                     toast.success("Flashcards Created! Redirecting to your library...")
                     setTimeout(() => {
                         setPage("library")

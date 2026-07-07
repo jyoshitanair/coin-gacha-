@@ -85,7 +85,7 @@ export default function Practice({item}) {
                         setCoinsChanged(prev => prev - 1)
                     }
                 }else if (tof ==4){
-                    newCoinCount = Math.max(0, data.coins - coinsChanged);
+                    newCoinCount = Math.max(0, data.coins - coins);
                     setCoinsChanged(0)
                 }
             }else{

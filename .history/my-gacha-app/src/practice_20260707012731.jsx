@@ -81,12 +81,14 @@ export default function Practice({item}) {
                     setCoinsChanged(prev => prev + 1)
                 }else if (tof == 3){
                     newCoinCount = Math.max(0, (data.coins- 1));
-                    if (newCoinCount < data.coins){
+                    if (newCoinCount != 0){
                         setCoinsChanged(prev => prev - 1)
                     }
                 }else if (tof ==4){
-                    newCoinCount = Math.max(0, data.coins - coinsChanged);
-                    setCoinsChanged(0)
+                    newCoinCount = Math.max(0, data.coins - right + wrong);
+                    if (newCoinCount != 0){
+                        setCoinsChanged(prev => prev - 1)
+                    }
                 }
             }else{
                 //user is null insert new row
@@ -188,7 +190,7 @@ export default function Practice({item}) {
         }
         {page == "library" && <Library uuid = {item.user}/>}
         {page == "dashboard" && <Dashboard/>}
-        {page == "done" && <Done uuid = {item.user} right = {right} wrong = {wrong} item = {item} coinsChanged = {coinsChanged} />}
+        {page == "done" && <Done uuid = {item.user} right = {right} wrong = {wrong} item = {item} />}
     </>
     );
 }
