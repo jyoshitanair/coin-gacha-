@@ -324,7 +324,7 @@ code {
   overflow: hidden; 
 }
 #information{
-  pointer-events: none;
+  pointer
   margin-top: -40px;
   font-family:cursive;
   border-color:#1d045c;

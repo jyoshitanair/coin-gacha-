@@ -33,7 +33,7 @@ export default function Dashboard() {
                 },1500)
             }
             //coins 
-            const {data, error: error2} = await supabase.from("coin_data").select('coins').eq("uuid", user.id).maybeSingle() //return an object not array and null if nothing
+            const {data, error: error2} = await supabase.from("coin_data").select('coins').eq("uuid", uuid).maybeSingle() //return an object not array and null if nothing
             if (error2){
                 toast.error(error2.message)
                 setProcessing(false);
@@ -43,15 +43,16 @@ export default function Dashboard() {
             if (data){
                 newCoinCount = data.coins;
             }
-            const {error} = await supabase.from("coin_data").upsert({uuid: user.id, coins: newCoinCount})
+            const {error} = await supabase.from("coin_data").upsert({uuid: uuid, coins: newCoinCount})
             if (error){
                 toast.error(error.message);
                 setProcessing(false);
                 return;
             }
             setProcessing(false);
-            setCoins(newCoinCount);
-            }
+            setCoins(newCoinCount)
+        }
+    }
         }
         getUser()
     }, []);
@@ -80,21 +81,17 @@ export default function Dashboard() {
                 <h1 className = "smallh1"> Your Information: </h1>
                 <p style = {{paddingLeft: '40px'}}>Username: {email}</p>
                 <p style = {{paddingLeft: '40px'}}>UUID: {uuid} </p>
-                <p style = {{paddingLeft: '40px'}}>Coins: {coins} </p>
             </div>
-            <div style = {{marginTop: '50px', pointerEvents: 'none'}} className = "buttonSpacer">
-            <div style = {{gap: '30px', display: 'flex', alignItems: 'center', flexDirection: 'column', pointerEvents: 'none'}}>
-                <button style = {{pointerEvents: 'auto'}} className = "buttons_normal" disabled = {processing} onClick={() => setPage("gamble")}> Gamble</button>
-                <p className = "mediump"> (if you would like to spend your money)</p>
+            <div style = {{marginTop: '50px'}}className = "buttonSpacer">
+            <div>
+                <button className = "buttons_normal" disabled = {processing} onClick={() => setPage("gamble")}> Gamble</button>
+                <p className = "otherp"> if you would like to spend your money</p>
             </div>
-            <div style = {{gap: '30px', display: 'flex', alignItems: 'center', flexDirection: 'column', pointerEvents: 'none'}}>
-                <button style = {{pointerEvents: 'auto'}} className = "buttons_normal" disabled = {processing} onClick = {() => setPage("flashcards")}> Flashcards </button>
-                <p className = "mediump"> (to answer questions and get more money!)</p>
+            <div>
+                <p className = "otherp"> to answer questions and get more money!</p>
+                <button className = "buttons_normal" disabled = {processing} onClick = {() => setPage("flashcards")}> Flashcards </button>
             </div>
-            <div style = {{gap: '30px', display: 'flex', alignItems: 'center', flexDirection: 'column', pointerEvents: 'none'}}>
-                <button style = {{pointerEvents: 'auto'}} className = "accent_button" disabled = {processing} onClick={() => Logout()}> Logout</button>
-                <p className = "mediump"> (bye friend!)</p>
-            </div>
+            <button className = "accent_button" disabled = {processing} onClick={() => Logout()}> Logout</button>
             </div>
             </div>
         }

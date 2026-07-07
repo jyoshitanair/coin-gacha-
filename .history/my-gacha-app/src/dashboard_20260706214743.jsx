@@ -84,7 +84,7 @@ export default function Dashboard() {
             </div>
             <div style = {{marginTop: '50px', pointerEvents: 'none'}} className = "buttonSpacer">
             <div style = {{gap: '30px', display: 'flex', alignItems: 'center', flexDirection: 'column', pointerEvents: 'none'}}>
-                <button style = {{pointerEvents: 'auto'}} className = "buttons_normal" disabled = {processing} onClick={() => setPage("gamble")}> Gamble</button>
+                <button className = "buttons_normal" disabled = {processing} onClick={() => setPage("gamble")}> Gamble</button>
                 <p className = "mediump"> (if you would like to spend your money)</p>
             </div>
             <div style = {{gap: '30px', display: 'flex', alignItems: 'center', flexDirection: 'column', pointerEvents: 'none'}}>
@@ -92,7 +92,7 @@ export default function Dashboard() {
                 <p className = "mediump"> (to answer questions and get more money!)</p>
             </div>
             <div style = {{gap: '30px', display: 'flex', alignItems: 'center', flexDirection: 'column', pointerEvents: 'none'}}>
-                <button style = {{pointerEvents: 'auto'}} className = "accent_button" disabled = {processing} onClick={() => Logout()}> Logout</button>
+                <button style = {{pointerEvents: '40px'}} className = "accent_button" disabled = {processing} onClick={() => Logout()}> Logout</button>
                 <p className = "mediump"> (bye friend!)</p>
             </div>
             </div>

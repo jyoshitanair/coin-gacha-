@@ -77,22 +77,22 @@ export default function Dashboard() {
             <Toaster/>
             <h1 className = "maintext"> welcome!</h1>
             <div id = "information">
-                <h1 className = "smallh1"> Your Information: </h1>
+                <h1  className = "smallh1"> Your Information: </h1>
                 <p style = {{paddingLeft: '40px'}}>Username: {email}</p>
                 <p style = {{paddingLeft: '40px'}}>UUID: {uuid} </p>
                 <p style = {{paddingLeft: '40px'}}>Coins: {coins} </p>
             </div>
-            <div style = {{marginTop: '50px', pointerEvents: 'none'}} className = "buttonSpacer">
-            <div style = {{gap: '30px', display: 'flex', alignItems: 'center', flexDirection: 'column', pointerEvents: 'none'}}>
-                <button style = {{pointerEvents: 'auto'}} className = "buttons_normal" disabled = {processing} onClick={() => setPage("gamble")}> Gamble</button>
+            <div style = {{marginTop: '50px'}} className = "buttonSpacer">
+            <div style = {{gap: '50px', display: 'flex', alignItems: 'center', flexDirection: 'column'}}>
+                <button className = "buttons_normal" disabled = {processing} onClick={() => setPage("gamble")}> Gamble</button>
                 <p className = "mediump"> (if you would like to spend your money)</p>
             </div>
-            <div style = {{gap: '30px', display: 'flex', alignItems: 'center', flexDirection: 'column', pointerEvents: 'none'}}>
-                <button style = {{pointerEvents: 'auto'}} className = "buttons_normal" disabled = {processing} onClick = {() => setPage("flashcards")}> Flashcards </button>
+            <div style = {{gap: '50px', display: 'flex', alignItems: 'center', flexDirection: 'column'}}>
+                <button className = "buttons_normal" disabled = {processing} onClick = {() => setPage("flashcards")}> Flashcards </button>
                 <p className = "mediump"> (to answer questions and get more money!)</p>
             </div>
-            <div style = {{gap: '30px', display: 'flex', alignItems: 'center', flexDirection: 'column', pointerEvents: 'none'}}>
-                <button style = {{pointerEvents: 'auto'}} className = "accent_button" disabled = {processing} onClick={() => Logout()}> Logout</button>
+            <div style = {{gap: '50px', display: 'flex', alignItems: 'center', flexDirection: 'column'}}>
+                <button className = "accent_button" disabled = {processing} onClick={() => Logout()}> Logout</button>
                 <p className = "mediump"> (bye friend!)</p>
             </div>
             </div>

@@ -324,12 +324,11 @@ code {
   overflow: hidden; 
 }
 #information{
-  pointer-events: none;
-  margin-top: -40px;
+  margin-top: 40px;
   font-family:cursive;
   border-color:#1d045c;
   background-color: #66aaee;
-  padding: 30px;
+  padding: 40px;
   border-radius: 60px;
   border-width: 5px;
   border-style: solid;

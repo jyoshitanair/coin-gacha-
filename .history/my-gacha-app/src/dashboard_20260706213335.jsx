@@ -82,19 +82,16 @@ export default function Dashboard() {
                 <p style = {{paddingLeft: '40px'}}>UUID: {uuid} </p>
                 <p style = {{paddingLeft: '40px'}}>Coins: {coins} </p>
             </div>
-            <div style = {{marginTop: '50px', pointerEvents: 'none'}} className = "buttonSpacer">
-            <div style = {{gap: '30px', display: 'flex', alignItems: 'center', flexDirection: 'column', pointerEvents: 'none'}}>
-                <button style = {{pointerEvents: 'auto'}} className = "buttons_normal" disabled = {processing} onClick={() => setPage("gamble")}> Gamble</button>
-                <p className = "mediump"> (if you would like to spend your money)</p>
+            <div style = {{marginTop: '50px'}}className = "buttonSpacer">
+            <div>
+                <button className = "buttons_normal" disabled = {processing} onClick={() => setPage("gamble")}> Gamble</button>
+                <p className = "otherp"> if you would like to spend your money</p>
             </div>
-            <div style = {{gap: '30px', display: 'flex', alignItems: 'center', flexDirection: 'column', pointerEvents: 'none'}}>
-                <button style = {{pointerEvents: 'auto'}} className = "buttons_normal" disabled = {processing} onClick = {() => setPage("flashcards")}> Flashcards </button>
-                <p className = "mediump"> (to answer questions and get more money!)</p>
+            <div>
+                <p className = "otherp"> to answer questions and get more money!</p>
+                <button className = "buttons_normal" disabled = {processing} onClick = {() => setPage("flashcards")}> Flashcards </button>
             </div>
-            <div style = {{gap: '30px', display: 'flex', alignItems: 'center', flexDirection: 'column', pointerEvents: 'none'}}>
-                <button style = {{pointerEvents: 'auto'}} className = "accent_button" disabled = {processing} onClick={() => Logout()}> Logout</button>
-                <p className = "mediump"> (bye friend!)</p>
-            </div>
+            <button className = "accent_button" disabled = {processing} onClick={() => Logout()}> Logout</button>
             </div>
             </div>
         }
