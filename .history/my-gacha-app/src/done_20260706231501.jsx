@@ -25,7 +25,7 @@ export default function Done({uuid, right,wrong, item}) {
             <div> 
                 <h1 className = "maintext"> You're done! </h1>
                 <div className = "row">
-                <div style = {{display: 'flex', alignItems: 'center', width: '70vw', backgroundColor: "#c084fc00",borderColor: "#c084fc00", }} className = "title_details">
+                <div style = {{display: 'flex',flexDirection: 'column',alignItems: 'center', width: '70vw', height: '70vh', backgroundColor = "#c084fc00", }} className = "title_details">
                     <p>  <strong> <em> {right} </em></strong>  correct</p>
                     <p> <strong> <em> {wrong} </em></strong> wrong </p>
                     <p> and <strong> <em> {right} </em></strong>  coin/s gained</p>
@@ -33,7 +33,7 @@ export default function Done({uuid, right,wrong, item}) {
                 {(wrong > right) && 
                 <img className = "patchotherway" src = {sadcat}/>
                 }
-                {(wrong == right) && 
+                {(wrong = right) && 
                 <img className = "patchotherway" src = {hugcat}/>
                 }
                 {(wrong < right) && 

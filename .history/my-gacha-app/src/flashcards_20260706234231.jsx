@@ -40,17 +40,10 @@ export default function Flashcards({uuid}) {
     }
     return(
     <>
-        {page == "flashcards" && <div className = "center" style = {{pointerEvents: 'none'}}>
+        {page == "flashcards" && <div className = "center">
             <Toaster/>
-            <h1 className = "maintext"> Flashcards </h1>
-            <p style = {{maxWidth: '20vw', padding: '0px', margin: '0px'}} className = "otherp"> Total Coins : {coins}</p>
-            <div style = {{pointerEvents: 'none'}} className = "patcher">
-                <button style = {{pointerEvents: 'auto'}} disabled = {loading} className = "accent_button" onClick={() => setPage("newset")}> New Set</button>
-                <button style = {{pointerEvents: 'auto'}} disabled = {loading} className = "accent_button" onClick={() => setPage("library")}> My Library</button>
-                <button style = {{pointerEvents: 'auto'}} disabled = {loading} className = "buttons_normal" onClick={() => setPage("gamble")}> Gamble</button>
-                <button style = {{pointerEvents: 'auto'}} disabled = {loading} className = "buttons_normal" onClick={() => setPage("dashboard")}> Dashboard</button>
-            </div>
-            <details className = "bottom" style = {{pointerEvents: 'auto'}}>
+            <h1 style = {{marginBottom: '90px'}} className = "maintext"> Flashcards </h1>
+            <details pointerEvents = {{marginBottom: '90px'}}>
                 <summary> First time?</summary>
                 <div> 
                     <p style = {{ maxWidth: '80vw',width: '100%', fontSize: '25px'}} className = "mediump_normal"> here you can create your own flashcards and play them! there are 2 modes learn and test</p>
@@ -58,6 +51,15 @@ export default function Flashcards({uuid}) {
                     <p style = {{ maxWidth: '70vw',width: '100%', paddingLeft: '60px'}} className = "mediump_normal"> <strong> <em> test: </em></strong> for every question you get right you get 1 coin and you lose 1 coin for every question you get wrong! don't worry, you can't go below zero though! you can also only say if you got it right or wrong after you look at the term </p>
                 </div>
             </details>
+            
+            
+            <p style = {{maxWidth: '20vw', padding: '0px', paddingTop: '200px'}} className = "otherp"> Total Coins : {coins}</p>
+            <div className = "patcher">
+                <button disabled = {loading} className = "accent_button" onClick={() => setPage("newset")}> New Set</button>
+                <button disabled = {loading} className = "accent_button" onClick={() => setPage("library")}> My Library</button>
+                <button disabled = {loading} className = "buttons_normal" onClick={() => setPage("gamble")}> Gamble</button>
+                <button disabled = {loading} className = "buttons_normal" onClick={() => setPage("dashboard")}> Dashboard</button>
+            </div>
         </div>}
         {page == "dashboard" && <Dashboard/>}
         {page == "gamble" && <Gamble uuid = {uuid}/>}

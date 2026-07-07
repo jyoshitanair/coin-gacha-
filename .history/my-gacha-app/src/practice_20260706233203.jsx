@@ -75,18 +75,21 @@ export default function Practice({item}) {
             if (data){
                 if(tof == 1){
                     newCoinCount = data.coins;
-                }else if(tof == 2){
-                    newCoinCount =data.coins+ 1;
-                }else if (tof == 3){
-                    newCoinCount = Math.max(0, (data.coins- 1));
+                }else{
+                    if(tof == 2){
+                        newCoinCount =data.coins+ 1;
+                    }
+                    if (tof == 3){
+                        newCoinCount = Math.max(0, (data.coins- 1));
+                    }
                 }
             }else{
                 //user is null insert new row
                 if(tof == 2){
                     newCoinCount = 1;
                 }
-                if (tof == 3 || tof == 1){
-                    newCoinCount = 0;
+                if (tof == 3){
+                    newCoinCount = Math.max(0, (newCoinCount - 1));
                 }
             }
             //becuz i hv two one need to be renamedX
@@ -102,9 +105,9 @@ export default function Practice({item}) {
         setLoading(false)
         if(tof == 2 || tof == 3){
             if (index == item.flashcardData.length -1){
-                setLoading(true)
                 toast.success("yayyyy you finished!")
                 setTimeout(() => {
+                    setLoading(true)
                     setPage("done")
                 },1500)
             }else{

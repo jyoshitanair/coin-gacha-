@@ -102,9 +102,9 @@ export default function Practice({item}) {
         setLoading(false)
         if(tof == 2 || tof == 3){
             if (index == item.flashcardData.length -1){
-                setLoading(true)
                 toast.success("yayyyy you finished!")
                 setTimeout(() => {
+                    setLoading(false)
                     setPage("done")
                 },1500)
             }else{

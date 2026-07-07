@@ -33,7 +33,7 @@ export default function Done({uuid, right,wrong, item}) {
                 {(wrong > right) && 
                 <img className = "patchotherway" src = {sadcat}/>
                 }
-                {(wrong == right) && 
+                {(wrong = right) && 
                 <img className = "patchotherway" src = {hugcat}/>
                 }
                 {(wrong < right) && 
