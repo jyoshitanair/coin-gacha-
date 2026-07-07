@@ -80,14 +80,16 @@ export default function Practice({item}) {
                 }else if (tof == 3){
                     newCoinCount = Math.max(0, (data.coins- 1));
                 }else if (tof ==4){
-                    newCoinCount = Math.max(0, (data.coins - (right + wrong)))
+                    newCoinCount = Math.max(0, (data.coins - (right - wrong)))
+                    setRight(0);
+                    setRight(0);
                 }
             }else{
                 //user is null insert new row
-                if(tof == 2){
+                if(tof == 2 || tof == 4){
                     newCoinCount = 1;
                 }
-                if (tof == 3 || tof == 1|| tof == 4){
+                if (tof == 3 || tof == 1){
                     newCoinCount = 0;
                 }
             }
@@ -120,9 +122,6 @@ export default function Practice({item}) {
             setWrong(prev => prev + 1)
         }
         if (tof == 4){
-            setRight(0);
-            setWrong(0);
-            setIndex(0);
             setMode("learn");
         }
     }

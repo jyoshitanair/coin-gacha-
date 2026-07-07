@@ -70,7 +70,7 @@ export default function Done({uuid, right,wrong, item}) {
                 >gamble</button>
             </div></div>}
             {page == "dashboard" && <Dashboard/>}
-            {page == "library" && <Library uuid = {uuid}/>}
+            {page == "library" && <Practice uuid = {uuid}/>}
             {page == "flashcards" && <Flashcards uuid = {uuid}/>}
             {page == "gamble" && <Gamble uuid = {uuid}/>}
             {page == "practice" && <Practice item = {item}/>}

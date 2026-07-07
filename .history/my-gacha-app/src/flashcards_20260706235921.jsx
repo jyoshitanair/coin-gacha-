@@ -45,10 +45,10 @@ export default function Flashcards({uuid}) {
             <h1 className = "maintext"> Flashcards </h1>
             <p style = {{maxWidth: '20vw', padding: '0px', margin: '0px'}} className = "otherp"> Total Coins : {coins}</p>
             <div style = {{pointerEvents: 'none'}} className = "patcher">
-                <button style = {{pointerEvents: 'auto'}} disabled = {loading} className = "accent_button" onClick={() => {setLoading(true); setPage("newset")}}> New Set</button>
-                <button style = {{pointerEvents: 'auto'}} disabled = {loading} className = "accent_button" onClick={() => {setLoading(true); setPage("library")}}> My Library</button>
-                <button style = {{pointerEvents: 'auto'}} disabled = {loading} className = "buttons_normal" onClick={() => {setLoading(true); setPage("gamble")}}> Gamble</button>
-                <button style = {{pointerEvents: 'auto'}} disabled = {loading} className = "buttons_normal" onClick={() => {setLoading(true); setPage("dashboard")}}> Dashboard</button>
+                <button style = {{pointerEvents: 'auto'}} disabled = {loading} className = "accent_button" onClick={() => {setLoading(true); setPage("newset")}> New Set</button>
+                <button style = {{pointerEvents: 'auto'}} disabled = {loading} className = "accent_button" onClick={() => setPage("library")}> My Library</button>
+                <button style = {{pointerEvents: 'auto'}} disabled = {loading} className = "buttons_normal" onClick={() => setPage("gamble")}> Gamble</button>
+                <button style = {{pointerEvents: 'auto'}} disabled = {loading} className = "buttons_normal" onClick={() => setPage("dashboard")}> Dashboard</button>
             </div>
             <details className = "bottom" style = {{pointerEvents: 'auto'}}>
                 <summary> First time?</summary>

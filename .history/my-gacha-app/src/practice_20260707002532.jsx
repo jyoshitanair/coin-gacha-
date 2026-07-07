@@ -102,6 +102,9 @@ export default function Practice({item}) {
             setLoading(false);
         }
         setLoading(false)
+        if (tof == 4){
+            
+        }
         if(tof == 2 || tof == 3){
             if (index == item.flashcardData.length -1){
                 setLoading(true)

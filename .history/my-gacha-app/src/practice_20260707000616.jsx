@@ -79,15 +79,13 @@ export default function Practice({item}) {
                     newCoinCount =data.coins+ 1;
                 }else if (tof == 3){
                     newCoinCount = Math.max(0, (data.coins- 1));
-                }else if (tof ==4){
-                    newCoinCount = Math.max(0, (data.coins - (right + wrong)))
                 }
             }else{
                 //user is null insert new row
                 if(tof == 2){
                     newCoinCount = 1;
                 }
-                if (tof == 3 || tof == 1|| tof == 4){
+                if (tof == 3 || tof == 1){
                     newCoinCount = 0;
                 }
             }
@@ -119,12 +117,6 @@ export default function Practice({item}) {
         if(tof == 3){
             setWrong(prev => prev + 1)
         }
-        if (tof == 4){
-            setRight(0);
-            setWrong(0);
-            setIndex(0);
-            setMode("learn");
-        }
     }
     return(
         <>
@@ -147,7 +139,6 @@ export default function Practice({item}) {
                     {item.flashcardData &&
                             <>
                                 <div>
-                                    <p> #{index + 1}</p>
                                     <button className = "flashcardito" onClick = {() => {setButtonText(prev => !prev)}}>{buttonText? `Term: ${item.flashcardData[index].term}`: `Definition: ${item.flashcardData[index].definition}` }</button>
                                 </div>
                             </>
@@ -160,7 +151,6 @@ export default function Practice({item}) {
                     {item.flashcardData &&
                             <>
                                 <div>
-                                    <p> #{index + 1}</p>
                                     <button className = "flashcardito" onClick = {() => {setButtonText(prev => !prev)}}>{buttonText? `Term: ${item.flashcardData[index].term}`: `Definition: ${item.flashcardData[index].definition}` }</button>
                                 </div>
                             </>
@@ -171,7 +161,8 @@ export default function Practice({item}) {
                         setLoading(true)
                         const yon = window.confirm("are you sure? This is reset all your coin progress so far...")
                         if(yon){
-                            updateCoinCount(4)
+                            resetcoins()
+                            setMode("learn")
                         }else{
                             setLoading(false)
                         }

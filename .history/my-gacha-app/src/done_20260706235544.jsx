@@ -28,7 +28,7 @@ export default function Done({uuid, right,wrong, item}) {
                 <div style = {{display: 'flex', alignItems: 'center', width: '70vw', backgroundColor: "#c084fc00",borderColor: "#c084fc00", }} className = "title_details">
                     <p>  <strong> <em> {right} </em></strong>  correct</p>
                     <p> <strong> <em> {wrong} </em></strong> wrong </p>
-                    <p> and <strong> <em> {right-wrong} </em></strong>  coin change</p>
+                    <p> and <strong> <em> {right} </em></strong>  coin/s </p>
                 </div>
                 {(wrong > right) && 
                 <img className = "patchotherway" src = {sadcat}/>
@@ -70,7 +70,7 @@ export default function Done({uuid, right,wrong, item}) {
                 >gamble</button>
             </div></div>}
             {page == "dashboard" && <Dashboard/>}
-            {page == "library" && <Library uuid = {uuid}/>}
+            {page == "library" && <Practice uuid = {uuid}/>}
             {page == "flashcards" && <Flashcards uuid = {uuid}/>}
             {page == "gamble" && <Gamble uuid = {uuid}/>}
             {page == "practice" && <Practice item = {item}/>}

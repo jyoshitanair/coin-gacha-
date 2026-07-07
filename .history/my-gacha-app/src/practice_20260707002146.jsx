@@ -80,7 +80,7 @@ export default function Practice({item}) {
                 }else if (tof == 3){
                     newCoinCount = Math.max(0, (data.coins- 1));
                 }else if (tof ==4){
-                    newCoinCount = Math.max(0, (data.coins - (right + wrong)))
+                    newCoinCount = Math.max(0, (data.coins - (right - wrong)))
                 }
             }else{
                 //user is null insert new row
@@ -124,6 +124,7 @@ export default function Practice({item}) {
             setWrong(0);
             setIndex(0);
             setMode("learn");
+
         }
     }
     return(

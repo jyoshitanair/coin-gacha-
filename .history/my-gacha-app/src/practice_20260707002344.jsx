@@ -124,6 +124,7 @@ export default function Practice({item}) {
             setWrong(0);
             setIndex(0);
             setMode("learn");
+
         }
     }
     return(
