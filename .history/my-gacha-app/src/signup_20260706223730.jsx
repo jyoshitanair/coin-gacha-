@@ -72,11 +72,11 @@ export default function Signup() {
             <Toaster className = "toaster"/>
             <div style = {{paddingBottom: '20px'}}>
             
-            </div>
-            <div className = "patcher" style = {{height: 'auto', paddingBottom: '50px'}}>
-                <h1 className = "maintext" > sign up</h1>
-                <img style = {{height: '300px',position: 'absolute', width: '300px', objectFit: 'cover', marginTop: '0'}} className = "patchotherway" src = {wavecat}/>
-            </div>
+                        </div>
+                        <div className = "patcher" style = {{height: 'auto', paddingBottom: '50px'}}>
+                            <h1 className = "maintext" > sign up</h1>
+                            <img style = {{height: '300px',position: 'absolute', width: '300px', objectFit: 'cover', marginTop: '0'}} className = "patchotherway" src = {wavecat}/>
+                        </div>
             <form className = "form" onSubmit = {handleSignup}>
                 <input
                 disabled = {processing}

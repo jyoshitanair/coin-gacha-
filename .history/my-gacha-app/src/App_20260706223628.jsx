@@ -80,7 +80,7 @@ function App() {
       </motion.div>
       <motion.div 
       className = "patcher"
-      initial = {{opacity: 0, y: (200)}}
+      initial = {{opacity: 0, y: (50)}}
       viewport = {{once: false}}
       whileInView = {{opacity: 1, y: (0) }}
       transition = {{duration: 0.7, ease: "easeInOut"}}>

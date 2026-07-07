@@ -94,7 +94,7 @@ export default function Dashboard() {
                     <img className = "patch" src = {sparklecat}/>
                 </div>
             </div>
-            <div style = {{marginTop: '100px', pointerEvents: 'none'}} className = "buttonSpacer">
+            <div style = {{marginTop: '-50px', pointerEvents: 'none'}} className = "buttonSpacer">
             <div style = {{gap: '30px', display: 'flex', alignItems: 'center', flexDirection: 'column', pointerEvents: 'none'}}>
                 <button style = {{pointerEvents: 'auto'}} className = "buttons_normal" disabled = {processing} onClick={() => setPage("gamble")}> Gamble</button>
                 <p className = "mediump"> (if you would like to spend your money)</p>
