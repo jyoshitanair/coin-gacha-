@@ -6,7 +6,7 @@ import Flashcards from './flashcards.jsx'
 import Practice from './practice.jsx'
 import toast, {Toaster} from 'react-hot-toast'
 
-//cats
+//cast
 import hugcat from "./assets_p2/hugcat.PNG"
 import sparklecat from "./assets_p2/sparklecat.PNG"
 import wavecat from "./assets_p2/wavecat.PNG"

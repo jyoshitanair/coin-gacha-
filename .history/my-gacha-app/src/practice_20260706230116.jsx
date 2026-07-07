@@ -128,10 +128,9 @@ export default function Practice({item}) {
                         <h3 className = "mediump"> Your coins: {coins}</h3>
                         <h3 className = "mediump"> Mode: <strong> <em> {mode} </em> </strong></h3>
                     </div>
-                <div style = {{paddingLeft: '400px', paddingRight: '400px'}} className = "buttonSpacer">
-                    <button className = "buttons_normal" onClick = {() => {setPage("dashboard")}}> Dashboard </button>
-                    <button className = "buttons_normal" onClick = {() => {setPage("library")}}> Library </button>
-                </div>
+                <div className = "buttonSpacer"> </div>
+                <button className = "buttons_normal" onClick = {() => {setPage("dashboard")}}> Dashboard </button>
+                <button className = "buttons_normal" onClick = {() => {setPage("library")}}> Library </button>
                 {mode == "learn" && <div> 
                     {item.flashcardData &&
                             <>
@@ -142,7 +141,7 @@ export default function Practice({item}) {
                     }
                     <button className = "buttons_normal" disabled = {(index == item.flashcardData.length - 1) || loading} onClick = {() => {setIndex(prev => (Math.min(item.flashcardData.length-1,prev +1)))}}> Next</button>
                     <button className = "buttons_normal" disabled = {(index == 0) || loading} onClick = {() => {setIndex(prev => (Math.max(0,prev -1)))}}> Previous</button>
-                    <button className = "accent_button" onClick = {() => {setMode("test")}}> Test </button>
+                    <button className = "buttons_normal" onClick = {() => {setMode("test")}}> Test </button>
                 </div>}
                 {mode == "test" && <div>
                     {item.flashcardData &&
@@ -154,7 +153,7 @@ export default function Practice({item}) {
                         }
                     <button className = "buttons_normal" disabled = {loading || buttonText} onClick = {() => {updateCoinCount(2)}}> correct</button>
                     <button className = "buttons_normal" disabled = {loading || buttonText} onClick = {() => {updateCoinCount(3)}}> wrong</button>
-                    <button className = "accent_button" onClick = {() => {setMode("learn")}}> Learn </button>
+                    <button className = "buttons_normal" onClick = {() => {setMode("learn")}}> Learn </button>
                 </div>}
             </div>
         </>

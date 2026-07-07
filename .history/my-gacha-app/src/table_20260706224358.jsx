@@ -68,7 +68,7 @@ export default function Table({uuid}) {
             {page == "table" && loading == false &&
                 <div className = "center">
                     <Toaster/>
-                    <h1 className = "maintext" > All Pulls</h1>
+                    <h1 style = {{marginBottom: '40px'}} className = "maintext" > All Pulls</h1>
                     <button 
                     style = {{marginBottom: '40px'}}
                     className = "buttons_normal" 

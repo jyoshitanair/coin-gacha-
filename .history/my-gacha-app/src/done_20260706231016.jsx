@@ -6,11 +6,6 @@ import Flashcards from './flashcards.jsx'
 import Practice from './practice.jsx'
 import toast, {Toaster} from 'react-hot-toast'
 
-//cats
-import hugcat from "./assets_p2/hugcat.PNG"
-import sparklecat from "./assets_p2/sparklecat.PNG"
-import wavecat from "./assets_p2/wavecat.PNG"
-import sadcat from "./assets_p2/sadcat.PNG"
 //supabase
 import { createClient } from '@supabase/supabase-js'
 const supabaseUrl = import.meta.env.VITE_SUPABASE_URL

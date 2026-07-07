@@ -70,7 +70,7 @@ export default function Table({uuid}) {
                     <Toaster/>
                     <h1 className = "maintext" > All Pulls</h1>
                     <button 
-                    style = {{marginBottom: '40px'}}
+                    style = {{paddingLeft: '40px'}}
                     className = "buttons_normal" 
                     onClick = {() => setPage("gamble")}
                     >Gamble</button>
@@ -85,7 +85,6 @@ export default function Table({uuid}) {
                     </div>
                     <button 
                     className = "buttons_normal" 
-                    style = {{marginBottom: '40px'}}
                     disabled = {pageNumber >= totalPages}
                     onClick = {() => {
                         setPageNumber(prev => (Math.min(prev + 1, totalPages)))
@@ -93,7 +92,6 @@ export default function Table({uuid}) {
                     >Next</button>
                     <button 
                     className = "buttons_normal" 
-                    style = {{marginBottom: '40px'}}
                     disabled = {pageNumber <= 1}
                     onClick = {() => {
                         setPageNumber(prev => (Math.max(prev - 1, 1)))

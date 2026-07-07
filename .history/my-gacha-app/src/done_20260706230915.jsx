@@ -6,11 +6,6 @@ import Flashcards from './flashcards.jsx'
 import Practice from './practice.jsx'
 import toast, {Toaster} from 'react-hot-toast'
 
-//cats
-import hugcat from "./assets_p2/hugcat.PNG"
-import sparklecat from "./assets_p2/sparklecat.PNG"
-import wavecat from "./assets_p2/wavecat.PNG"
-import sadcat from "./assets_p2/sadcat.PNG"
 //supabase
 import { createClient } from '@supabase/supabase-js'
 const supabaseUrl = import.meta.env.VITE_SUPABASE_URL
@@ -28,11 +23,8 @@ export default function Done({uuid, right,wrong, item}) {
                 <div className = "row">
                 <div style = {{display: 'flex',alignItems: 'center', width: '70vw' }} className = "title_details">
                     <p>  <strong> <em> {right} </em></strong>  correct</p>
-                    <p> <strong> <em> {wrong} </em></strong> wrong </p>
+                    <p> <strong> <em> {wrong} </em></strong> wrong! </p>
                     <p> and <strong> <em> {right} </em></strong>  coin/s gained</p>
-                </div>
-                {(wrong > right) && 
-                }
                 </div>
             <div style = {{ marginTop: '50px', display: 'flex', flexDirection: 'row', gap: '50px', alignItems: 'center'}}>
                 <button 

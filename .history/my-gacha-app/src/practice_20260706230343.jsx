@@ -130,7 +130,7 @@ export default function Practice({item}) {
                     </div>
                 <div style = {{paddingLeft: '400px', paddingRight: '400px'}} className = "buttonSpacer">
                     <button className = "buttons_normal" onClick = {() => {setPage("dashboard")}}> Dashboard </button>
-                    <button className = "buttons_normal" onClick = {() => {setPage("library")}}> Library </button>
+                    <button className = "accent_button" onClick = {() => {setPage("library")}}> Library </button>
                 </div>
                 {mode == "learn" && <div> 
                     {item.flashcardData &&
@@ -154,7 +154,7 @@ export default function Practice({item}) {
                         }
                     <button className = "buttons_normal" disabled = {loading || buttonText} onClick = {() => {updateCoinCount(2)}}> correct</button>
                     <button className = "buttons_normal" disabled = {loading || buttonText} onClick = {() => {updateCoinCount(3)}}> wrong</button>
-                    <button className = "accent_button" onClick = {() => {setMode("learn")}}> Learn </button>
+                    <button className = "buttons_normal" onClick = {() => {setMode("learn")}}> Learn </button>
                 </div>}
             </div>
         </>

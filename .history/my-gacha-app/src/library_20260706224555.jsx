@@ -4,7 +4,6 @@ import Practice from './practice.jsx'
 import Gamble from './gamble.jsx'
 import Flashcards from './flashcards.jsx'
 import toast, {Toaster} from 'react-hot-toast'
-import Newset from './newset.jsx'
 //supabase
 import { createClient } from '@supabase/supabase-js'
 const supabaseUrl = import.meta.env.VITE_SUPABASE_URL
@@ -97,14 +96,10 @@ export default function Library({uuid}) {
                             className = "buttons_normal" 
                             onClick = {() => setPage("dashboard")}
                         >dashboard</button>
+
                         <button 
                             disabled = {processing}
                             className = "accent_button" 
-                            onClick = {() => setPage("newset")}
-                        >new set</button>
-                        <button 
-                            disabled = {processing}
-                            className = "buttons_normal" 
                             onClick = {() => setPage("flashcards")}
                         >flashcards</button>
                         
@@ -146,7 +141,6 @@ export default function Library({uuid}) {
             {page == "practice" && <Practice item = {practice2}/>}
             {page == "flashcards" && <Flashcards uuid = {uuid}/>}
             {page == "gamble" && <Gamble uuid = {uuid}/>}
-            {page == "newset" && <Newset uuid = {uuid}/>}
         </>
     );
 }

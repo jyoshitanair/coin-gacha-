@@ -129,7 +129,7 @@ code {
   font-size: 140px;
   color:#4e0c81;
   width: 70vw;
-  line-height: 150px;
+  line
 }
 .buttons_normal:disabled,.accent_button:disabled,.buttons_small:disabled{
   background-color: #948f94 !important;

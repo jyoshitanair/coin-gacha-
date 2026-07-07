@@ -42,15 +42,14 @@ export default function Flashcards({uuid}) {
     <>
         {page == "flashcards" && <div className = "center">
             <Toaster/>
-            <h1 style = {{marginBottom: '90px'}} className = "maintext"> Flashcards </h1>
+            <h1 className = "maintext"> Flashcards </h1>
             <p className = "smallp"> meowwww</p>
-            <p style = {{padding: '0px'}} className = "otherp"> Total Coins : {coins}</p>
+            <p className = "otherp"> Total Coins : {coins}</p>
             <div className = "patcher">
-                <button disabled = {loading} className = "accent_button" onClick={() => setPage("newset")}> New Set</button>
-                <button disabled = {loading} className = "accent_button" onClick={() => setPage("library")}> My Library</button>
-                <button disabled = {loading} className = "buttons_normal" onClick={() => setPage("gamble")}> Gamble</button>
-                <button disabled = {loading} className = "buttons_normal" onClick={() => setPage("dashboard")}> Dashboard</button>
-            </div>
+            <button disabled = {loading} className = "accent_button" onClick={() => setPage("newset")}> New Set</button>
+            <button disabled = {loading} className = "accent_button" onClick={() => setPage("library")}> My Library</button>
+            <button disabled = {loading} className = "buttons_normal" onClick={() => setPage("gamble")}> Gamble</button>
+            <button disabled = {loading} className = "buttons_normal" onClick={() => setPage("dashboard")}> Dashboard</button>
         </div>}
         {page == "dashboard" && <Dashboard/>}
         {page == "gamble" && <Gamble uuid = {uuid}/>}

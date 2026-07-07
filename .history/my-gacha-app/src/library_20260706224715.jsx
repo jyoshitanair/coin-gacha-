@@ -4,7 +4,6 @@ import Practice from './practice.jsx'
 import Gamble from './gamble.jsx'
 import Flashcards from './flashcards.jsx'
 import toast, {Toaster} from 'react-hot-toast'
-import Newset from './newset.jsx'
 //supabase
 import { createClient } from '@supabase/supabase-js'
 const supabaseUrl = import.meta.env.VITE_SUPABASE_URL

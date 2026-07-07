@@ -42,7 +42,7 @@ export default function Flashcards({uuid}) {
     <>
         {page == "flashcards" && <div className = "center">
             <Toaster/>
-            <h1 style = {{marginBottom: '90px'}} className = "maintext"> Flashcards </h1>
+            <h1 style = {{marginBottom: '60px'}} className = "maintext"> Flashcards </h1>
             <p className = "smallp"> meowwww</p>
             <p style = {{padding: '0px'}} className = "otherp"> Total Coins : {coins}</p>
             <div className = "patcher">

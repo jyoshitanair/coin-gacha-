@@ -93,7 +93,6 @@ export default function Table({uuid}) {
                     >Next</button>
                     <button 
                     className = "buttons_normal" 
-                    style = {{marginBottom: '40px'}}
                     disabled = {pageNumber <= 1}
                     onClick = {() => {
                         setPageNumber(prev => (Math.max(prev - 1, 1)))
